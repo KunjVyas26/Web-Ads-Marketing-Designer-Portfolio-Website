@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&family=Roboto+Condensed:wght@700;900&display=swap" rel="stylesheet">
+<style>
+  @media (max-width:640px){
+    [data-ps-grid]{grid-template-columns:1fr !important}
+    [data-ps-hide]{display:none !important}
+    [data-ps-feat]{grid-template-columns:1fr !important}
+  }
+</style>
+</helmet>
+<div style="font-family:'Roboto','Helvetica Neue',Arial,sans-serif;background:#fff;height:100%;display:flex;flex-direction:column;min-height:0">
+  <div style="height:30px;flex:none;background:#0e2536;display:flex;align-items:center;gap:6px;padding:0 13px"><span style="width:8px;height:8px;border-radius:50%;background:#ff5f56"></span><span style="width:8px;height:8px;border-radius:50%;background:#ffbd2e"></span><span style="width:8px;height:8px;border-radius:50%;background:#27c93f"></span><span style="margin-left:11px;font-size:10px;color:#7f95a8;font-weight:600">{{ url }}</span></div>
+  <div style="flex:1;min-height:0;overflow:hidden">
+
+    <!-- ONBOARDING -->
+    <sc-if value="{{ isOnboarding }}" hint-placeholder-val="{{ false }}">
+      <div style="display:grid;grid-template-columns:1fr 1.1fr;height:100%" data-ps-grid>
+        <div style="background:linear-gradient(160deg,#0E2A40,#155EA0);padding:22px 20px;color:#fff;display:flex;flex-direction:column" data-ps-hide>
+          <div style="display:flex;align-items:center;gap:7px;margin-bottom:auto"><span style="width:22px;height:22px;border-radius:6px;background:rgba(255,255,255,.16);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:900">◆</span><span style="font-family:'Roboto Condensed';font-weight:900;font-size:13px;text-transform:uppercase">Northwind</span></div>
+        <div>
+          <div style="font-family:'Roboto Condensed';font-size:24px;font-weight:900;line-height:1.05;text-transform:uppercase;margin-bottom:10px">Let's get<br>you set up</div>
+          <p style="margin:0;font-size:12px;color:rgba(255,255,255,.8);line-height:1.5">Three quick steps and your first dashboard is live.</p>
+        </div>
+        <div style="margin-top:22px;display:flex;flex-direction:column;gap:9px">
+          <div style="display:flex;align-items:center;gap:9px;font-size:11.5px;font-weight:700"><span style="width:20px;height:20px;border-radius:50%;background:#3BB54A;color:#06331a;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:900">✓</span>Create account</div>
+          <div style="display:flex;align-items:center;gap:9px;font-size:11.5px;font-weight:800"><span style="width:20px;height:20px;border-radius:50%;background:#fff;color:#155EA0;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:900">2</span>Connect a source</div>
+          <div style="display:flex;align-items:center;gap:9px;font-size:11.5px;font-weight:600;color:rgba(255,255,255,.6)"><span style="width:20px;height:20px;border-radius:50%;background:rgba(255,255,255,.18);display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:900">3</span>Invite your team</div>
+        </div>
+        </div>
+        <div style="padding:24px 26px;display:flex;flex-direction:column;justify-content:center;background:#fff">
+          <div style="font-size:10.5px;font-weight:800;color:#155EA0;letter-spacing:.05em;text-transform:uppercase;margin-bottom:6px">Step 2 of 3</div>
+          <div style="font-size:18px;font-weight:900;color:#0E2A40;margin-bottom:4px">Connect your first source</div>
+          <p style="margin:0 0 16px;font-size:12px;color:#8A8A8A;line-height:1.5">Pick a tool to import data from - you can add more later.</p>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:9px;margin-bottom:16px">
+            <div style="border:1.5px solid #155EA0;background:#EAF3FB;border-radius:9px;padding:12px;display:flex;align-items:center;gap:8px"><span style="width:22px;height:22px;border-radius:6px;background:#155EA0"></span><span style="font-size:12px;font-weight:800;color:#0E2A40">PostgreSQL</span></div>
+            <div style="border:1.5px solid #E6E8EB;border-radius:9px;padding:12px;display:flex;align-items:center;gap:8px"><span style="width:22px;height:22px;border-radius:6px;background:#D9DCE0"></span><span style="font-size:12px;font-weight:700;color:#4A5560">Stripe</span></div>
+            <div style="border:1.5px solid #E6E8EB;border-radius:9px;padding:12px;display:flex;align-items:center;gap:8px"><span style="width:22px;height:22px;border-radius:6px;background:#D9DCE0"></span><span style="font-size:12px;font-weight:700;color:#4A5560">HubSpot</span></div>
+            <div style="border:1.5px solid #E6E8EB;border-radius:9px;padding:12px;display:flex;align-items:center;gap:8px"><span style="width:22px;height:22px;border-radius:6px;background:#D9DCE0"></span><span style="font-size:12px;font-weight:700;color:#4A5560">CSV upload</span></div>
+          </div>
+          <div style="display:flex;gap:9px;align-items:center"><span style="background:#3BB54A;color:#06331a;font-size:12.5px;font-weight:900;padding:11px 22px;border-radius:9px">Continue →</span><span style="font-size:12px;font-weight:700;color:#8A8A8A">Skip for now</span></div>
+        </div>
+      </div>
+    </sc-if>
+
+    <!-- EMAIL / LIFECYCLE JOURNEY -->
+    <sc-if value="{{ isEmail }}" hint-placeholder-val="{{ false }}">
+      <div style="display:grid;grid-template-columns:1fr 200px;height:100%" data-ps-grid>
+        <div style="padding:18px;background:#F1F3F6;position:relative">
+          <div style="font-size:12px;font-weight:900;color:#0E2A40;margin-bottom:14px">Welcome journey</div>
+          <div style="display:flex;flex-direction:column;gap:0">
+            <div style="display:flex;align-items:center;gap:10px"><span style="width:34px;height:34px;border-radius:9px;background:#0E2A40;color:#fff;display:flex;align-items:center;justify-content:center;font-size:14px">⚑</span><div style="background:#fff;border:1px solid #E6E8EB;border-radius:9px;padding:9px 13px;flex:1"><div style="font-size:11.5px;font-weight:800;color:#0E2A40">Trigger · Signup</div><div style="font-size:10px;color:#8A8A8A;font-weight:600">New user created</div></div></div>
+            <div style="width:2px;height:14px;background:#B7C2CC;margin-left:16px"></div>
+            <div style="display:flex;align-items:center;gap:10px"><span style="width:34px;height:34px;border-radius:9px;background:#155EA0;color:#fff;display:flex;align-items:center;justify-content:center;font-size:14px">✉</span><div style="background:#fff;border:1.5px solid #155EA0;border-radius:9px;padding:9px 13px;flex:1;box-shadow:0 4px 12px rgba(21,94,160,.14)"><div style="font-size:11.5px;font-weight:800;color:#0E2A40">Email · Welcome</div><div style="font-size:10px;color:#15803D;font-weight:700">68% open · 24% click</div></div></div>
+            <div style="width:2px;height:14px;background:#B7C2CC;margin-left:16px"></div>
+            <div style="display:flex;align-items:center;gap:10px"><span style="width:34px;height:34px;border-radius:9px;background:#FFB400;color:#3a2c00;display:flex;align-items:center;justify-content:center;font-size:14px">◷</span><div style="background:#fff;border:1px solid #E6E8EB;border-radius:9px;padding:9px 13px;flex:1"><div style="font-size:11.5px;font-weight:800;color:#0E2A40">Wait · 3 days</div></div></div>
+            <div style="width:2px;height:14px;background:#B7C2CC;margin-left:16px"></div>
+            <div style="display:flex;align-items:center;gap:10px"><span style="width:34px;height:34px;border-radius:9px;background:#3BB54A;color:#06331a;display:flex;align-items:center;justify-content:center;font-size:14px">✦</span><div style="background:#fff;border:1px solid #E6E8EB;border-radius:9px;padding:9px 13px;flex:1"><div style="font-size:11.5px;font-weight:800;color:#0E2A40">Email · Activation tip</div><div style="font-size:10px;color:#8A8A8A;font-weight:600">Conditional on activity</div></div></div>
+          </div>
+        </div>
+        <div style="background:#fff;border-left:1px solid #E6E8EB;padding:16px" data-ps-hide>
+          <div style="font-size:10.5px;font-weight:800;color:#8A8A8A;text-transform:uppercase;letter-spacing:.05em;margin-bottom:12px">Preview</div>
+          <div style="border:1px solid #E6E8EB;border-radius:9px;overflow:hidden">
+            <div style="height:30px;background:linear-gradient(90deg,#0E2A40,#163C5A);display:flex;align-items:center;justify-content:center;color:#fff;font-family:'Roboto Condensed';font-weight:900;font-size:11px;letter-spacing:.04em;text-transform:uppercase">Northwind</div>
+            <div style="padding:12px">
+              <div style="font-size:11px;font-weight:900;color:#0E2A40;line-height:1.25;margin-bottom:6px">Welcome to Northwind 👋</div>
+              <div style="font-size:9px;color:#4A5560;line-height:1.5;margin-bottom:10px">You're in. Let's get your first dashboard live in under 10 minutes — no setup calls.</div>
+              <div style="background:linear-gradient(135deg,#EAF3FB,#E7F6ED);border-radius:6px;padding:9px;margin-bottom:10px"><div style="font-size:8px;font-weight:800;color:#155EA0;text-transform:uppercase;letter-spacing:.04em;margin-bottom:3px">3-step quick start</div><div style="font-size:8.5px;color:#4A5560;line-height:1.4">Connect a source · invite a teammate · publish a template</div></div>
+              <div style="background:#3BB54A;color:#06331a;font-size:9px;font-weight:900;text-align:center;padding:8px;border-radius:6px">Finish setup →</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </sc-if>
+
+    <!-- DESIGN SYSTEM -->
+    <sc-if value="{{ isSystem }}" hint-placeholder-val="{{ false }}">
+      <div style="display:grid;grid-template-columns:120px 1fr 150px;height:100%" data-ps-grid>
+        <div style="background:#F6F8FA;border-right:1px solid #E6E8EB;padding:14px 10px" data-ps-hide>
+          <div style="font-size:10px;font-weight:800;color:#8A8A8A;text-transform:uppercase;letter-spacing:.05em;margin-bottom:10px">Layers</div>
+          <div style="display:flex;flex-direction:column;gap:7px;font-size:11px;font-weight:700;color:#4A5560">
+            <span style="color:#155EA0">▸ Buttons</span><span>▸ Inputs</span><span>▸ Cards</span><span>▸ Badges</span><span>▸ Nav</span><span>▸ Tokens</span>
+          </div>
+        </div>
+        <div style="background:#EEF1F4;padding:16px;overflow:hidden">
+          <div style="font-size:11px;font-weight:900;color:#0E2A40;margin-bottom:12px">Buttons / Variants</div>
+          <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px">
+            <span style="background:#155EA0;color:#fff;font-size:11px;font-weight:800;padding:9px 15px;border-radius:8px">Primary</span>
+            <span style="background:#3BB54A;color:#fff;font-size:11px;font-weight:800;padding:9px 15px;border-radius:8px">Success</span>
+            <span style="background:#fff;color:#155EA0;font-size:11px;font-weight:800;padding:9px 15px;border-radius:8px;border:1.5px solid #D9DCE0">Outline</span>
+            <span style="background:#F1F3F6;color:#8A8A8A;font-size:11px;font-weight:800;padding:9px 15px;border-radius:8px">Disabled</span>
+          </div>
+          <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px">
+            <span style="font-size:10px;font-weight:800;color:#15803D;background:#E7F6ED;padding:5px 11px;border-radius:999px">● In stock</span>
+            <span style="font-size:10px;font-weight:800;color:#CD201F;background:#FDECEC;padding:5px 11px;border-radius:999px">● Sale</span>
+            <span style="font-size:10px;font-weight:800;color:#155EA0;background:#EAF3FB;padding:5px 11px;border-radius:999px">● New</span>
+          </div>
+          <div style="display:flex;gap:8px">
+            <div style="flex:1;background:#fff;border:1px solid #E6E8EB;border-radius:9px;padding:10px"><div style="height:30px;border-radius:6px;background:linear-gradient(135deg,#155EA0,#0E2A40);margin-bottom:8px;display:flex;align-items:center;justify-content:center;color:#fff;font-size:8px;font-weight:800;letter-spacing:.04em">CARD / DEFAULT</div><div style="font-size:10px;font-weight:800;color:#0E2A40;margin-bottom:2px">Product tile</div><div style="font-size:8.5px;color:#8A8A8A">Auto-layout · 3 states</div></div>
+            <div style="flex:1;background:#fff;border:1px solid #E6E8EB;border-radius:9px;padding:10px"><div style="height:30px;border-radius:6px;background:linear-gradient(135deg,#E07A1F,#FFB400);margin-bottom:8px;display:flex;align-items:center;justify-content:center;color:#fff;font-size:8px;font-weight:800;letter-spacing:.04em">CARD / SALE</div><div style="font-size:10px;font-weight:800;color:#0E2A40;margin-bottom:2px">Promo tile</div><div style="font-size:8.5px;color:#8A8A8A">Badge slot · price</div></div>
+          </div>
+        </div>
+        <div style="background:#fff;border-left:1px solid #E6E8EB;padding:14px 12px" data-ps-hide>
+          <div style="font-size:10px;font-weight:800;color:#8A8A8A;text-transform:uppercase;letter-spacing:.05em;margin-bottom:10px">Properties</div>
+          <div style="display:flex;flex-direction:column;gap:9px">
+            <div><div style="font-size:9px;color:#8A8A8A;font-weight:700;margin-bottom:3px">Fill</div><div style="display:flex;align-items:center;gap:6px"><span style="width:16px;height:16px;border-radius:4px;background:#155EA0"></span><span style="font-size:10px;font-weight:700;color:#4A5560">#155EA0</span></div></div>
+            <div><div style="font-size:9px;color:#8A8A8A;font-weight:700;margin-bottom:3px">Radius</div><div style="font-size:10px;font-weight:700;color:#4A5560">10 px</div></div>
+            <div><div style="font-size:9px;color:#8A8A8A;font-weight:700;margin-bottom:3px">Text</div><div style="font-size:10px;font-weight:700;color:#4A5560">Roboto · 800</div></div>
+            <div style="margin-top:4px;background:#EAF3FB;border-radius:7px;padding:8px"><div style="font-size:9px;font-weight:800;color:#155EA0">Variable → --bb-blue</div></div>
+          </div>
+        </div>
+      </div>
+    </sc-if>
+
+    <!-- LANDING PAGE -->
+    <sc-if value="{{ isLanding }}" hint-placeholder-val="{{ false }}">
+      <div style="height:100%;overflow:hidden;background:#fff">
+        <div style="height:38px;border-bottom:1px solid #E6E8EB;display:flex;align-items:center;justify-content:space-between;padding:0 16px"><span style="font-family:'Roboto Condensed';font-weight:900;font-size:13px;text-transform:uppercase;color:#0E2A40">Northwind</span><span style="background:#3BB54A;color:#06331a;font-size:10px;font-weight:800;padding:6px 12px;border-radius:7px">Start free</span></div>
+        <div style="padding:22px 24px;background:radial-gradient(70% 90% at 90% 0%,rgba(59,181,74,.1),transparent 55%),linear-gradient(180deg,#F6F8FA,#fff);text-align:center">
+          <span style="display:inline-block;font-size:9.5px;font-weight:800;color:#15803D;background:#E7F6ED;padding:4px 11px;border-radius:999px;letter-spacing:.04em;text-transform:uppercase;margin-bottom:12px">Limited campaign offer</span>
+          <div style="font-family:'Roboto Condensed';font-size:26px;font-weight:900;color:#0E2A40;text-transform:uppercase;line-height:1;letter-spacing:-.01em;margin-bottom:8px">Ship reports<br>in minutes</div>
+          <p style="margin:0 auto 14px;font-size:12px;color:#4A5560;max-width:36ch;line-height:1.5">Turn scattered data into live dashboards your whole team reads.</p>
+          <div style="display:flex;gap:8px;justify-content:center;margin-bottom:18px"><span style="background:#3BB54A;color:#06331a;font-size:12px;font-weight:900;padding:11px 22px;border-radius:9px">Get started free →</span><span style="background:#fff;color:#155EA0;font-size:12px;font-weight:800;padding:11px 20px;border-radius:9px;border:1.5px solid #D9DCE0">Book demo</span></div>
+        </div>
+        <div style="padding:0 24px 20px;display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px" data-ps-feat>
+          <div style="background:#F6F8FA;border:1px solid #E6E8EB;border-radius:9px;padding:12px"><span style="width:24px;height:24px;border-radius:7px;background:#EAF3FB;color:#155EA0;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:12px;margin-bottom:8px">⚡</span><div style="font-size:10px;font-weight:800;color:#0E2A40;margin-bottom:3px">Connect in minutes</div><div style="font-size:8.5px;color:#4A5560;line-height:1.45">One-click integrations, no engineering tickets.</div></div>
+          <div style="background:#F6F8FA;border:1px solid #E6E8EB;border-radius:9px;padding:12px"><span style="width:24px;height:24px;border-radius:7px;background:#E7F6ED;color:#15803D;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:12px;margin-bottom:8px">◨</span><div style="font-size:10px;font-weight:800;color:#0E2A40;margin-bottom:3px">Dashboards anyone reads</div><div style="font-size:8.5px;color:#4A5560;line-height:1.45">Clean, shareable views built for humans.</div></div>
+          <div style="background:#F6F8FA;border:1px solid #E6E8EB;border-radius:9px;padding:12px"><span style="width:24px;height:24px;border-radius:7px;background:#FFF1E0;color:#E07A1F;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:12px;margin-bottom:8px">✦</span><div style="font-size:10px;font-weight:800;color:#0E2A40;margin-bottom:3px">AI that explains itself</div><div style="font-size:8.5px;color:#4A5560;line-height:1.45">Ask in plain English, get the “why.”</div></div>
+        </div>
+      </div>
+    </sc-if>
+
+    <!-- CONTENT / AI -->
+    <sc-if value="{{ isContent }}" hint-placeholder-val="{{ false }}">
+      <div style="display:grid;grid-template-columns:130px 1fr 172px;height:100%" data-ps-grid>
+        <div style="background:#F6F8FA;border-right:1px solid #E6E8EB;padding:14px 10px" data-ps-hide>
+          <div style="font-size:10px;font-weight:800;color:#8A8A8A;text-transform:uppercase;letter-spacing:.05em;margin-bottom:10px">Content model</div>
+          <div style="display:flex;flex-direction:column;gap:7px;font-size:11px;font-weight:700;color:#4A5560">
+            <span style="color:#155EA0">▸ Landing page</span><span>▸ Blog post</span><span>▸ Feature</span><span>▸ CTA block</span><span>▸ SEO meta</span>
+          </div>
+        </div>
+        <div style="background:#fff;padding:16px;overflow:hidden">
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px"><div style="font-size:12px;font-weight:900;color:#0E2A40">Landing page · Draft</div><span style="font-size:9.5px;font-weight:800;color:#E07A1F;background:#FFF1E0;padding:4px 9px;border-radius:6px">Unpublished</span></div>
+          <div style="margin-bottom:10px"><div style="font-size:9.5px;font-weight:700;color:#8A8A8A;margin-bottom:4px">Headline</div><div style="border:1px solid #E6E8EB;border-radius:7px;padding:9px 11px;font-size:12px;font-weight:800;color:#0E2A40">Ship reports in minutes, not meetings</div></div>
+          <div style="margin-bottom:10px"><div style="font-size:9.5px;font-weight:700;color:#8A8A8A;margin-bottom:4px">Body</div><div style="border:1px solid #E6E8EB;border-radius:7px;padding:9px 11px;font-size:10px;color:#4A5560;line-height:1.55">Northwind turns your scattered data into live dashboards your whole team actually reads — no SQL, no waiting on analytics. Connect a source and publish your first report in minutes.</div></div>
+          <div><div style="font-size:9.5px;font-weight:700;color:#8A8A8A;margin-bottom:4px">CTA label</div><div style="border:1px solid #E6E8EB;border-radius:7px;padding:9px 11px;font-size:12px;font-weight:800;color:#0E2A40">Start free - no card</div></div>
+        </div>
+        <div style="background:linear-gradient(160deg,#0E2A40,#155EA0);padding:14px 12px;color:#fff" data-ps-hide>
+          <div style="display:flex;align-items:center;gap:6px;font-size:10.5px;font-weight:900;text-transform:uppercase;letter-spacing:.04em;margin-bottom:12px"><span>✦</span> AI Assist</div>
+          <div style="background:rgba(255,255,255,.1);border-radius:8px;padding:10px;margin-bottom:9px"><div style="font-size:9.5px;font-weight:800;color:#9ff0ad;margin-bottom:4px">Suggestion</div><div style="font-size:10px;color:rgba(255,255,255,.9);line-height:1.45">Try "Turn data into decisions in minutes."</div></div>
+          <div style="display:flex;gap:6px;margin-bottom:14px"><span style="background:#3BB54A;color:#06331a;font-size:10px;font-weight:800;padding:6px 10px;border-radius:6px">Apply</span><span style="background:rgba(255,255,255,.14);color:#fff;font-size:10px;font-weight:700;padding:6px 10px;border-radius:6px">Redo</span></div>
+          <div style="font-size:9.5px;font-weight:800;color:rgba(255,255,255,.6);text-transform:uppercase;letter-spacing:.05em;margin-bottom:7px">Tone</div>
+          <div style="display:flex;flex-wrap:wrap;gap:5px"><span style="font-size:9.5px;font-weight:700;background:rgba(255,255,255,.14);padding:4px 9px;border-radius:999px">Confident</span><span style="font-size:9.5px;font-weight:700;background:rgba(255,255,255,.14);padding:4px 9px;border-radius:999px">Concise</span></div>
+        </div>
+      </div>
+    </sc-if>
+
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:560,&quot;height&quot;:320},&quot;variant&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;onboarding&quot;,&quot;email&quot;,&quot;system&quot;,&quot;landing&quot;,&quot;content&quot;],&quot;default&quot;:&quot;onboarding&quot;,&quot;tsType&quot;:&quot;string&quot;}}">
+class Component extends DCLogic {
+  renderVals() {
+    const v = this.props.variant || "onboarding";
+    const urls = {
+      onboarding: "app.northwind.io/setup",
+      email: "app.northwind.io/journeys",
+      system: "figma.com/file/voltage-ds",
+      landing: "go.northwind.io/campaign",
+      content: "app.contentful.com/spaces/northwind",
+    };
+    return {
+      isOnboarding: v === "onboarding",
+      isEmail: v === "email",
+      isSystem: v === "system",
+      isLanding: v === "landing",
+      isContent: v === "content",
+      url: urls[v] || urls.onboarding,
+    };
+  }
+}
+</script>
+</body>
+</html>

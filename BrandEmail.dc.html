@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&display=swap" rel="stylesheet">
+</helmet>
+<div style="font-family:'Roboto','Helvetica Neue',Arial,sans-serif;background:#EEF1F4;color:#1F2A33">
+
+  <!-- ================= ETHOS / BIGBATTERY ================= -->
+  <sc-if value="{{ isEthos }}" hint-placeholder-val="{{ true }}">
+  <div style="max-width:600px;margin:0 auto;background:#fff">
+    <img src="assets/emails/bb-header.png" alt="BigBattery — Own Your Power" style="width:100%;display:block" />
+    <img src="assets/emails/bb-hero.png" alt="Power What Matters Most — 10% off ETHOS kits with free shipping" style="width:100%;display:block" />
+    <div style="padding:26px 30px 8px">
+      <p style="margin:0 0 20px;font-size:15px;line-height:1.6;color:#1F2A33">Power your home with dependable energy storage and save while you do it. For a limited time, get <b>10% off all ETHOS kits</b> and receive free shipping on discounted ETHOS orders over $5,000. Whether you're building a new backup power system or expanding your current setup, ETHOS delivers scalable LiFePO4 energy storage designed for long-term reliability.</p>
+      <h2 style="margin:0 0 16px;font-size:22px;font-weight:900;color:#0E2A40;text-transform:uppercase;letter-spacing:-.01em">Why Choose ETHOS?</h2>
+      <sc-for list="{{ ethosBullets }}" as="b" hint-placeholder-count="5">
+        <div style="display:flex;align-items:flex-start;gap:11px;margin-bottom:11px"><span style="flex:none;color:#155EA0;font-weight:900;font-size:15px;margin-top:1px">✓</span><span style="font-size:14.5px;color:#1F2A33;line-height:1.5">{{ b }}</span></div>
+      </sc-for>
+      <p style="margin:20px 0 0;font-size:14px;line-height:1.6;color:#4A5560">Save 10% on complete ETHOS kits today. Free shipping applies when the discounted ETHOS order total exceeds $5,000.</p>
+      <p style="margin:6px 0 0;font-size:12px;color:#8A8A8A;font-style:italic">*The discount cannot be combined with other promotional or affiliate codes.</p>
+    </div>
+    <div style="text-align:center;padding:22px 30px 26px">
+      <span style="display:inline-block;background:#155EA0;color:#fff;font-weight:900;font-size:17px;letter-spacing:.06em;text-transform:uppercase;padding:15px 54px;border-radius:6px">Shop Now</span>
+    </div>
+    <img src="assets/emails/bb-eg4.png" alt="EG4 — Go Big On Savings, up to $470 off + free shipping over $3,000" style="width:100%;display:block" />
+    <div style="text-align:center;padding:24px 30px">
+      <p style="margin:0 0 18px;font-size:14px;line-height:1.6;color:#4A5560">Power up for less with new lower pricing on select EG4 batteries. Save up to $470, get free shipping on qualifying orders over $3,000, and unlock an extra 10% off when you add eligible products to your cart.</p>
+      <span style="display:inline-block;background:#155EA0;color:#fff;font-weight:900;font-size:17px;letter-spacing:.06em;text-transform:uppercase;padding:15px 54px;border-radius:6px">Shop Now</span>
+    </div>
+    <img src="assets/emails/bb-submit.png" alt="Submit Your System Build — show us how you're owning your power" style="width:100%;display:block" />
+    <div style="background:#0E2A40;padding:26px 30px;text-align:center">
+      <img src="assets/emails/bb-phone.png" alt="Call (+1) 818-280-3091" style="width:220px;max-width:70%;display:block;margin:0 auto 16px" />
+      <p style="margin:0;font-size:11.5px;color:#8da0ae;line-height:1.7">BigBattery · 400 Maple Street, Commerce, TX 75428<br>No longer want to receive these emails? <span style="color:#cdd8e2;text-decoration:underline">Unsubscribe</span></p>
+    </div>
+  </div>
+  </sc-if>
+
+  <!-- ================= DEEPCELLS / BATTERYEVO ================= -->
+  <sc-if value="{{ isEvo }}" hint-placeholder-val="{{ false }}">
+  <div style="max-width:600px;margin:0 auto;background:#0B0B0B">
+    <div style="background:#000;padding:18px 0;text-align:center"><img src="assets/emails/dc-logo.png" alt="DeepCells.com" style="width:230px;max-width:62%;display:block;margin:0 auto" /></div>
+    <img src="assets/emails/dc-hero.png" alt="Now Open For Online Ordering — shop BatteryEVO on DeepCells.com" style="width:100%;display:block" />
+    <div style="background:#12181F;padding:24px 30px;color:#c7d2db">
+      <p style="margin:0 0 18px;font-size:14px;line-height:1.6">For years, ordering from DeepCells meant requesting a quote and waiting on a custom order. That's changed. You can now purchase BatteryEVO lithium batteries directly on DeepCells.com with secure online checkout.</p>
+      <sc-for list="{{ evoChecks }}" as="c" hint-placeholder-count="5">
+        <div style="display:flex;align-items:flex-start;gap:10px;margin-bottom:9px"><span style="flex:none;color:#3BB54A;font-weight:900;font-size:13px;margin-top:1px">✓</span><span style="font-size:13.5px;line-height:1.45">{{ c }}</span></div>
+      </sc-for>
+    </div>
+    <div style="background:#0B0B0B;padding:6px 22px 26px">
+      <div style="text-align:center;padding:22px 0 18px">
+        <h2 style="margin:0;font-size:24px;font-weight:900;color:#fff;text-transform:uppercase;letter-spacing:.02em">Our Latest Arrivals</h2>
+        <p style="margin:6px 0 0;font-size:12.5px;color:#8b96a0;font-weight:600">Tap any battery below to view details and buy direct.</p>
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px">
+        <sc-for list="{{ evoProducts }}" as="p" hint-placeholder-count="8">
+          <div style="background:#fff;border-radius:8px;overflow:hidden;display:flex;flex-direction:column">
+            <div style="position:relative;background:#fff"><span style="position:absolute;top:8px;left:8px;background:#FFB400;color:#241a00;font-weight:900;font-size:11px;letter-spacing:.02em;padding:3px 8px;border-radius:3px">SAVE {{ p.save }}</span><img src="{{ p.img }}" alt="{{ p.name }}" style="width:100%;display:block" /></div>
+            <div style="padding:11px 12px 13px;display:flex;flex-direction:column;flex:1">
+              <div style="font-size:12px;font-weight:700;color:#0B0B0B;line-height:1.3;margin-bottom:8px;flex:1">{{ p.name }}</div>
+              <div style="display:flex;align-items:baseline;gap:7px;margin-bottom:9px"><span style="font-size:16px;font-weight:900;color:#15803D">{{ p.price }}</span><span style="font-size:11px;color:#9aa3ab;text-decoration:line-through;font-weight:600">{{ p.was }}</span></div>
+              <span style="text-align:center;background:#0B0B0B;color:#fff;font-size:10.5px;font-weight:800;letter-spacing:.04em;text-transform:uppercase;padding:8px;border-radius:4px">Shop Now ›</span>
+            </div>
+          </div>
+        </sc-for>
+      </div>
+    </div>
+    <div style="background:#12181F;padding:26px 30px;text-align:center">
+      <div style="font-weight:900;font-size:13px;letter-spacing:.1em;color:#8fb0c4;text-transform:uppercase;margin-bottom:16px">Shop By Application</div>
+      <div style="display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:10px">
+        <div><div style="font-size:24px;margin-bottom:5px">🏠</div><div style="font-size:9.5px;font-weight:800;color:#c7d2db;text-transform:uppercase;letter-spacing:.03em">Whole Home</div></div>
+        <div><div style="font-size:24px;margin-bottom:5px">⛳</div><div style="font-size:9.5px;font-weight:800;color:#c7d2db;text-transform:uppercase;letter-spacing:.03em">Golf Cart</div></div>
+        <div><div style="font-size:24px;margin-bottom:5px">🚛</div><div style="font-size:9.5px;font-weight:800;color:#c7d2db;text-transform:uppercase;letter-spacing:.03em">RV / Trailer</div></div>
+        <div><div style="font-size:24px;margin-bottom:5px">🏭</div><div style="font-size:9.5px;font-weight:800;color:#c7d2db;text-transform:uppercase;letter-spacing:.03em">Industrial</div></div>
+      </div>
+    </div>
+    <div style="background:#0B0B0B;padding:34px 30px;text-align:center">
+      <h2 style="margin:0 0 18px;font-size:26px;font-weight:900;color:#fff;text-transform:uppercase;line-height:1.05">No Quotes. No Waiting.<br><span style="color:#FFB400">Just Click &amp; Order.</span></h2>
+      <span style="display:inline-block;background:#FFB400;color:#241a00;font-weight:900;font-size:15px;letter-spacing:.04em;text-transform:uppercase;padding:14px 38px;border-radius:6px">Shop DeepCells Now ›</span>
+    </div>
+    <div style="background:#07090C;padding:22px 30px;text-align:center">
+      <p style="margin:0;font-size:11px;color:#5f6b76;line-height:1.7">Thank you for choosing DeepCells. — The DeepCells Team<br>Deep Cells · 9667 Owensmouth Ave, Chatsworth, CA 91311 · <span style="color:#8fa0ac;text-decoration:underline">Unsubscribe</span></p>
+    </div>
+  </div>
+  </sc-if>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:600,&quot;height&quot;:900},&quot;variant&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;ethos&quot;,&quot;evo&quot;],&quot;default&quot;:&quot;ethos&quot;,&quot;tsType&quot;:&quot;string&quot;}}">
+class Component extends DCLogic {
+  renderVals() {
+    const v = this.props.variant || "ethos";
+    return {
+      isEthos: v === "ethos",
+      isEvo: v === "evo",
+      ethosBullets: [
+        "Modular, expandable home energy storage",
+        "Reliable backup power for outages",
+        "Built for grid-tied and off-grid applications",
+        "Long-lasting LiFePO4 battery technology",
+        "Backed by BigBattery's U.S.-based support",
+      ],
+      evoChecks: [
+        "Shop BatteryEVO products online, anytime",
+        "Secure checkout — all major credit cards accepted",
+        "Powered by Shopify & Stripe for a fast, trusted experience",
+        "Orders typically ship within 48 hours",
+        "Every purchase backed by our 30-Day Satisfaction Guarantee",
+      ],
+      evoProducts: [
+        { img: "assets/emails/dc-1.png", name: "WALRUS G3 22kWh Home Backup System", price: "$3,394.00", was: "$5,149.00", save: "34%" },
+        { img: "assets/emails/dc-2.png", name: "12V OWL105 Battery (105Ah · 1.35 kWh)", price: "$230.00", was: "$399.00", save: "42%" },
+        { img: "assets/emails/dc-3.png", name: "24V Eagle Golf Cart Battery (60Ah · 1.5 kWh)", price: "$450.00", was: "$900.00", save: "50%" },
+        { img: "assets/emails/dc-4.png", name: "REINDEER 36V Lithium Battery (6.5 kWh)", price: "$1,189.00", was: "$1,899.00", save: "37%" },
+        { img: "assets/emails/dc-5.png", name: "48V BADGER Battery (47Ah · 2.1 kWh)", price: "$449.00", was: "$749.00", save: "40%" },
+        { img: "assets/emails/dc-6.png", name: "48V Rhino Home Backup Battery", price: "$5,002.00", was: "$7,145.00", save: "30%" },
+        { img: "assets/emails/dc-7.png", name: "72V FALCON Battery (27Ah · 2.1 kWh)", price: "$570.00", was: "$899.00", save: "37%" },
+        { img: "assets/emails/dc-8.png", name: "WALRUS PACIFIC 62kWh Home Backup System", price: "$7,689.00", was: "$15,049.00", save: "49%" },
+      ],
+    };
+  }
+}
+</script>
+</body>
+</html>

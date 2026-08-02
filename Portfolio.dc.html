@@ -40,7 +40,7 @@
   [data-cursor-dot]{position:fixed;top:0;left:0;width:5px;height:5px;border-radius:50%;background:#16302B;pointer-events:none;z-index:401;opacity:0;transform:translate(-50%,-50%);transition:opacity .3s,transform .12s}
   [data-cursor].pf-on-dark{border-color:#EDE8DD}
   [data-cursor-dot].pf-on-dark{background:#EDE8DD}
-  /* over media, background is unknowable — use a two-tone stroke that reads on any pixel */
+  /* over media, background is unknowable - use a two-tone stroke that reads on any pixel */
   [data-cursor].pf-on-media{border-color:#fff;box-shadow:0 0 0 1px rgba(0,0,0,.5),inset 0 0 0 1px rgba(0,0,0,.5)}
   [data-cursor-dot].pf-on-media{background:#fff;box-shadow:0 0 0 1.5px rgba(0,0,0,.55)}
   [data-cursor].pf-hot{width:62px;height:62px;background:rgba(166,118,60,.13);border-color:#A6763C}
@@ -56,6 +56,13 @@
   @keyframes pf-draw{from{stroke-dashoffset:230}to{stroke-dashoffset:0}}
   @keyframes pf-wave-hand{0%,60%,100%{transform:rotate(0)}70%{transform:rotate(14deg)}80%{transform:rotate(-10deg)}90%{transform:rotate(10deg)}}
   [data-introphoto]{animation:pf-photo-in .8s cubic-bezier(.19,1,.22,1) both}
+  @keyframes pf-load-run{from{left:0}to{left:100%}}
+  @keyframes pf-load-fill{from{transform:scaleX(0)}to{transform:scaleX(1)}}
+  @keyframes pf-load-settle{0%{transform:translateX(-50%) scale(1)}60%{transform:translateX(-50%) scale(1.06)}100%{transform:translateX(-50%) scale(1)}}
+  @keyframes pf-jump-in{0%{transform:translateY(120%);opacity:0}55%{transform:translateY(-14%);opacity:1}75%{transform:translateY(5%)}90%{transform:translateY(-2%)}100%{transform:translateY(0)}}
+  @keyframes pf-jump-soft{0%{transform:translateY(70%);opacity:0}60%{transform:translateY(-7%);opacity:1}80%{transform:translateY(3%)}100%{transform:translateY(0);opacity:1}}
+  @keyframes pf-diamond-in{0%{opacity:0;transform:rotate(45deg) scale(0)}60%{opacity:1;transform:rotate(45deg) scale(1.35)}100%{opacity:1;transform:rotate(45deg) scale(1)}}
+  @keyframes pf-rule-out{from{transform:scaleX(0)}to{transform:scaleX(1)}}
   [data-introwave] path{stroke-dasharray:230;animation:pf-draw .9s cubic-bezier(.65,0,.35,1) both}
   [data-introwave]{transform-origin:50% 90%;animation:pf-wave-hand 1.6s ease-in-out .7s infinite}
   [data-intro]{position:fixed;inset:0;z-index:500;background:#16302B;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:18px;cursor:pointer}
@@ -80,6 +87,10 @@
   [data-detail]::-webkit-scrollbar{width:10px}[data-detail]::-webkit-scrollbar-thumb{background:rgba(0,0,0,.2);border-radius:8px}
   /* ---------- Responsive ---------- */
   @media (max-width:960px){
+    [data-durgrid]{grid-template-columns:repeat(2,1fr) !important}
+    [data-mssplit]{grid-template-columns:1fr !important}
+    [data-msprac]{grid-template-columns:1fr !important;gap:26px !important}
+    [data-msplat]{grid-template-columns:1fr !important;gap:20px !important}
     [data-herogrid]{grid-template-columns:1fr !important;gap:44px !important}
     [data-skillgrid]{grid-template-columns:repeat(2,1fr) !important}
     [data-emailgrid]{grid-template-columns:repeat(2,1fr) !important}
@@ -92,6 +103,8 @@
     [data-workgrid]{grid-template-columns:1fr !important}
     [data-emailgrid]{grid-template-columns:1fr !important}
     [data-motiongrid]{grid-template-columns:repeat(2,1fr) !important}
+    [data-reelgrid]{grid-template-columns:1fr 1fr !important}
+    [data-socialrow]{grid-template-columns:1fr !important}
     [data-modalgrid]{grid-template-columns:1fr !important}
     header>div{padding-left:20px !important;padding-right:20px !important}
     section>div{padding-left:20px !important;padding-right:20px !important}
@@ -99,10 +112,36 @@
     [data-aboutgrid]{padding-left:20px !important;padding-right:20px !important}
   }
   @media (max-width:600px){
+    [data-durgrid]{grid-template-columns:1fr !important}
     [data-skillgrid]{grid-template-columns:1fr !important}
     [data-floater]{display:none !important}
     section{padding-top:58px !important;padding-bottom:58px !important}
     [data-herotop]{padding-top:48px !important;padding-bottom:52px !important}
+  }
+  @media (max-width:600px){
+    [data-reelgrid]{grid-template-columns:1fr !important}
+    [data-socialrow]{grid-template-columns:1fr !important}
+  }
+  /* ---------- Mobile: reel + intro ---------- */
+  @media (max-width:760px){
+    [data-socialrow]{gap:16px !important}
+    [data-socialrow] [data-reveal]{flex:none !important}
+    [data-socialstack]{height:auto !important}
+    /* a full-width 9/16 player is taller than the viewport: cap it */
+    [data-fb][data-ratio="tall"]{aspect-ratio:auto !important;height:min(72vh,520px) !important}
+    [data-reelfeature] [data-yt]{border-radius:0 !important}
+    [data-reelfeature]>div:last-child{padding:16px 18px 18px !important;gap:14px !important}
+    [data-featcap]{left:16px !important;right:16px !important;bottom:14px !important;gap:8px !important}
+    [data-featcap]>span:last-child{display:none !important}
+    [data-featplay]{width:52px !important;height:52px !important;font-size:16px !important;top:34% !important}
+  }
+  @media (max-width:600px){
+    [data-introload]{width:min(300px,80vw) !important}
+    [data-loadtoken]{width:52px !important;height:52px !important;margin-left:-26px !important}
+    [data-scrubhint]{display:none !important}
+  }
+  @media (max-width:420px){
+    [data-fb][data-ratio="tall"]{height:min(66vh,440px) !important}
   }
   @media (max-width:420px){
     [data-motiongrid]{grid-template-columns:1fr !important}
@@ -116,6 +155,21 @@
 <div ref="{{ rootRef }}" style="background:#F3F0E9;overflow-x:clip">
   <div data-progress></div>
   <div data-intro style="display:none">
+    <sc-if value="{{ introLoader }}" hint-placeholder-val="{{ true }}">
+      <div data-introload style="width:min(420px,72vw);margin-bottom:30px">
+        <div style="position:relative;height:64px;margin-bottom:16px">
+          <span data-loadtoken style="position:absolute;top:0;left:0;width:64px;height:64px;margin-left:-32px;border-radius:50%;overflow:hidden;border:1.5px solid rgba(199,154,94,.75);box-shadow:0 10px 26px rgba(0,0,0,.45);background:#0F2320;transform:translateX(-50%)">
+            <img src="uploads/pasted-1784429982375-0.png" alt="Kunj Vyas" style="width:100%;height:100%;object-fit:cover;object-position:center top;display:block;filter:grayscale(1) contrast(1.06)" />
+          </span>
+        </div>
+        <div style="position:relative;height:2px;background:rgba(237,232,221,.16);border-radius:2px;overflow:hidden">
+          <span data-loadfill style="position:absolute;inset:0;background:linear-gradient(90deg,#A6763C,#C79A5E);transform-origin:left;transform:scaleX(0)"></span>
+        </div>
+        <div style="display:flex;justify-content:space-between;margin-top:10px;font-size:9.5px;letter-spacing:.18em;text-transform:uppercase;color:rgba(237,232,221,.4)">
+          <span>Loading portfolio</span><span data-loadpct>0%</span>
+        </div>
+      </div>
+    </sc-if>
     <sc-if value="{{ introPhoto }}" hint-placeholder-val="{{ false }}">
       <div data-introphoto style="width:200px;height:200px;border-radius:50%;overflow:hidden;border:1.5px solid rgba(199,154,94,.6);box-shadow:0 20px 50px rgba(0,0,0,.4);margin-bottom:10px">
         <img src="uploads/pasted-1784429982375-0.png" alt="Kunj Vyas" style="width:100%;height:100%;object-fit:cover;object-position:center top;display:block;filter:grayscale(1) contrast(1.05)" />
@@ -127,8 +181,12 @@
       </svg>
     </sc-if>
     <div style="font-family:'Newsreader',Georgia,serif;font-size:clamp(30px,5vw,52px);font-weight:500;color:#F3F0E9;letter-spacing:-.01em;overflow:hidden"><span data-introname style="display:inline-block">{{ introGreeting }}<span style="color:#C79A5E">.</span></span></div>
-    <div style="width:min(260px,44vw);height:1px;background:#C79A5E;transform-origin:left;animation:pf-intro-rule .7s cubic-bezier(.76,0,.24,1) .28s both"></div>
-    <div style="font-size:10.5px;letter-spacing:.24em;text-transform:uppercase;color:rgba(237,232,221,.55)">Senior Web Marketing Designer</div>
+    <div style="display:flex;align-items:center;gap:11px;margin:2px 0">
+      <span style="width:22px;height:1px;background:linear-gradient(90deg,transparent,rgba(199,154,94,.55));transform-origin:right;animation:pf-rule-out .5s cubic-bezier(.22,.61,.36,1) .5s both"></span>
+      <span data-introdiamond style="width:5px;height:5px;background:#C79A5E;transform:rotate(45deg);display:block;animation:pf-diamond-in .5s cubic-bezier(.34,1.56,.64,1) .34s both"></span>
+      <span style="width:22px;height:1px;background:linear-gradient(90deg,rgba(199,154,94,.55),transparent);transform-origin:left;animation:pf-rule-out .5s cubic-bezier(.22,.61,.36,1) .5s both"></span>
+    </div>
+    <div style="font-size:10.5px;letter-spacing:.24em;text-transform:uppercase;color:rgba(237,232,221,.55);text-align:center;overflow:hidden"><span data-introtitle style="display:inline-block">Senior Motion Designer</span></div>
   </div>
   <div data-cursor></div>
   <div data-cursor-dot></div>
@@ -138,9 +196,10 @@
     <div style="max-width:1160px;margin:0 auto;padding:0 32px;height:70px;display:flex;align-items:center;justify-content:space-between;gap:20px" data-navcondense>
       <a href="#top" style="font-family:'Newsreader',Georgia,serif;font-size:22px;font-weight:500;letter-spacing:-.01em;color:#1C1A17">Kunj Vyas<span style="color:#A6763C">.</span></a>
       <nav style="display:flex;align-items:center;gap:26px" data-desknav>
+        <a href="#motion" style="font-size:12px;font-weight:500;color:#6E685E;letter-spacing:.02em">Motion</a>
+        <a href="#motionsystem" style="font-size:12px;font-weight:500;color:#6E685E;letter-spacing:.02em">Motion system</a>
         <a href="#work" style="font-size:12px;font-weight:500;color:#6E685E;letter-spacing:.02em">Work</a>
         <a href="#skills" style="font-size:12px;font-weight:500;color:#6E685E;letter-spacing:.02em">Fit</a>
-        <a href="#motion" style="font-size:12px;font-weight:500;color:#6E685E;letter-spacing:.02em">Motion</a>
         <a href="#system" style="font-size:12px;font-weight:500;color:#6E685E;letter-spacing:.02em">Systems</a>
         <a href="#email" style="font-size:12px;font-weight:500;color:#6E685E;letter-spacing:.02em">Email</a>
         <a href="#gallery" style="font-size:12px;font-weight:500;color:#6E685E;letter-spacing:.02em">Gallery</a>
@@ -158,9 +217,10 @@
     </div>
     <sc-if value="{{ menuOpen }}" hint-placeholder-val="{{ false }}">
       <nav onClick="{{ closeMenu }}" style="border-top:1px solid #E0D9CC;background:rgba(243,240,233,.98);backdrop-filter:blur(12px);padding:10px 20px 16px;display:flex;flex-direction:column;gap:2px">
+        <a href="#motion" style="font-size:15px;font-weight:500;color:#1C1A17;padding:12px 6px;border-bottom:1px solid #EAE4D7">Motion</a>
+        <a href="#motionsystem" style="font-size:15px;font-weight:500;color:#1C1A17;padding:12px 6px;border-bottom:1px solid #EAE4D7">Motion system</a>
         <a href="#work" style="font-size:15px;font-weight:500;color:#1C1A17;padding:12px 6px;border-bottom:1px solid #EAE4D7">Work</a>
         <a href="#skills" style="font-size:15px;font-weight:500;color:#1C1A17;padding:12px 6px;border-bottom:1px solid #EAE4D7">Fit</a>
-        <a href="#motion" style="font-size:15px;font-weight:500;color:#1C1A17;padding:12px 6px;border-bottom:1px solid #EAE4D7">Motion</a>
         <a href="#system" style="font-size:15px;font-weight:500;color:#1C1A17;padding:12px 6px;border-bottom:1px solid #EAE4D7">Systems</a>
         <a href="#email" style="font-size:15px;font-weight:500;color:#1C1A17;padding:12px 6px;border-bottom:1px solid #EAE4D7">Email</a>
         <a href="#gallery" style="font-size:15px;font-weight:500;color:#1C1A17;padding:12px 6px;border-bottom:1px solid #EAE4D7">Gallery</a>
@@ -174,14 +234,16 @@
   <section id="top" style="background:linear-gradient(180deg,#F6F3EC,#F1EDE4);border-bottom:1px solid #E0D9CC">
     <div style="max-width:1160px;margin:0 auto;padding:74px 32px 68px;display:grid;grid-template-columns:1.02fr .98fr;gap:60px;align-items:center" data-herogrid data-herotop>
       <div>
-        <div style="display:flex;align-items:center;gap:12px;margin-bottom:26px">
+        <div style="display:flex;align-items:center;gap:12px;margin-bottom:26px;flex-wrap:wrap">
           <span style="width:8px;height:8px;border-radius:50%;background:#16302B"></span>
-          <span style="font-size:11px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:#6E685E">Senior Web Marketing Designer / AD</span>
+          <span style="font-size:11px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:#1C1A17">Senior Motion Designer</span>
+          <span style="width:14px;height:1px;background:#C0B8A6"></span>
+          <span style="font-size:11px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:#6E685E">Web Marketing Designer / AD</span>
         </div>
-        <h1 style="margin:0 0 24px;font-family:'Newsreader',Georgia,serif;font-size:clamp(44px,6vw,72px);line-height:1.02;font-weight:500;letter-spacing:-.02em;color:#1C1A17">Design that earns attention — and quietly converts.</h1>
-        <p style="margin:0 0 34px;font-size:18px;line-height:1.6;color:#57524A;max-width:52ch">I'm Kunj Vyas, a designer with eight years turning marketing goals into responsive web experiences, lifecycle email, and design systems engineers are glad to build. UX-led, Figma-fluent, evidence-driven.</p>
+        <h1 style="margin:0 0 24px;font-family:'Newsreader',Georgia,serif;font-size:clamp(44px,6vw,72px);line-height:1.02;font-weight:500;letter-spacing:-.02em;color:#1C1A17">Motion that makes the complex feel effortless.</h1>
+        <p style="margin:0 0 34px;font-size:18px;line-height:1.6;color:#57524A;max-width:52ch">I'm Kunj Vyas, a designer with eight years across motion, digital, and web - animating interfaces, brand assets, and campaigns, and documenting the timing and easing so engineers can ship them at scale.</p>
         <div style="display:flex;gap:14px;flex-wrap:wrap;margin-bottom:44px">
-          <a href="#work" style="display:inline-flex;align-items:center;gap:9px;background:#16302B;color:#F3F0E9;font-weight:500;font-size:15px;padding:15px 28px;border-radius:4px">View selected work</a>
+          <a href="#motion" style="display:inline-flex;align-items:center;gap:9px;background:#16302B;color:#F3F0E9;font-weight:500;font-size:15px;padding:15px 28px;border-radius:4px">View motion work</a>
           <a href="tel:+16028495629" style="display:inline-flex;align-items:center;gap:9px;background:transparent;color:#1C1A17;font-weight:500;font-size:15px;padding:15px 28px;border-radius:4px;border:1px solid #1C1A17">Call / text</a>
         </div>
         <div style="display:flex;gap:44px;flex-wrap:wrap;padding-top:30px;border-top:1px solid #E0D9CC">
@@ -225,84 +287,7 @@
     </div>
     <div style="border-top:1px solid #E0D9CC">
       <div style="max-width:1160px;margin:0 auto;padding:18px 32px;display:flex;flex-wrap:wrap;gap:10px 26px;align-items:center;justify-content:center;color:#8A8377;font-size:12px;font-weight:600;letter-spacing:.08em;text-transform:uppercase">
-        <span>Figma</span><span style="color:#D2CABA">/</span><span>Design systems</span><span style="color:#D2CABA">/</span><span>Webflow</span><span style="color:#D2CABA">/</span><span>Contentful</span><span style="color:#D2CABA">/</span><span>Framer</span><span style="color:#D2CABA">/</span><span>Responsive web</span><span style="color:#D2CABA">/</span><span>A/B testing</span><span style="color:#D2CABA">/</span><span>AI workflows</span>
-      </div>
-    </div>
-  </section>
-
-  <!-- ============ SELECTED WORK ============ -->
-  <section id="work" style="scroll-margin-top:80px;padding:88px 0 20px">
-    <div style="max-width:1160px;margin:0 auto;padding:0 32px">
-      <div data-reveal style="margin-bottom:44px">
-        <div style="display:flex;align-items:center;gap:14px;margin-bottom:20px">
-          <span style="font-family:'Newsreader',serif;font-size:15px;color:#A6763C">01</span>
-          <span style="font-size:11px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:#6E685E">Selected work</span>
-          <span style="flex:1;height:1px;background:#E0D9CC"></span>
-        </div>
-        <h2 style="margin:0 0 12px;font-family:'Newsreader',Georgia,serif;font-size:clamp(30px,4vw,46px);font-weight:500;letter-spacing:-.015em;line-height:1.05;max-width:20ch">Case studies that moved the metric</h2>
-        <p style="margin:0;font-size:16px;color:#57524A;max-width:60ch;line-height:1.6">Six projects across web, digital, and email. Open any card for the full case study — problem, process, artifacts, and outcome.</p>
-      </div>
-      <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:24px" data-workgrid>
-        <sc-for list="{{ cases }}" as="c" hint-placeholder-count="6">
-          <article data-reveal data-open="case-{{ $index }}" onClick="{{ openDetail }}" onMouseEnter="{{ cardEnter }}" onMouseLeave="{{ cardLeave }}" style="display:flex;flex-direction:column;background:#FBFAF6;border:1px solid #E0D9CC;border-radius:8px;overflow:hidden;cursor:pointer;transition:transform .25s cubic-bezier(.22,.61,.36,1),box-shadow .25s cubic-bezier(.22,.61,.36,1),border-color .25s">
-            <div style="position:relative;height:212px;background:#EFEAE0;overflow:hidden;padding:20px 20px 0">
-              <span style="position:absolute;top:14px;left:14px;z-index:3;background:#FBFAF6;color:#16302B;font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:5px 10px;border-radius:3px;border:1px solid #E0D9CC">{{ c.tag }}</span>
-              <span style="position:absolute;top:14px;right:14px;z-index:3;background:rgba(22,48,43,.9);color:#F3F0E9;font-size:10px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;padding:5px 10px;border-radius:3px">View case →</span>
-              <sc-if value="{{ c.pageDemo }}" hint-placeholder-val="{{ false }}">
-                <div style="border-radius:8px 8px 0 0;overflow:hidden;box-shadow:0 -8px 30px rgba(28,26,23,.2);height:100%;display:flex">
-                  <dc-import name="DashboardMock" hint-size="100%,100%" style="width:100%"></dc-import>
-                </div>
-              </sc-if>
-              <sc-if value="{{ c.wire }}" hint-placeholder-val="{{ true }}">
-                <div style="border-radius:8px 8px 0 0;overflow:hidden;box-shadow:0 -8px 30px rgba(28,26,23,.2);height:100%;display:flex">
-                  <dc-import name="ProjectScreen" variant="{{ c.screen }}" hint-size="100%,100%" style="width:100%"></dc-import>
-                </div>
-              </sc-if>
-            </div>
-            <div style="padding:24px 24px 26px;display:flex;flex-direction:column;flex:1;border-top:1px solid #E0D9CC">
-              <h3 style="margin:0 0 5px;font-family:'Newsreader',Georgia,serif;font-size:23px;font-weight:500;color:#1C1A17;letter-spacing:-.01em">{{ c.title }}</h3>
-              <p style="margin:0 0 18px;font-size:11px;color:#8A8377;font-weight:700;text-transform:uppercase;letter-spacing:.1em">{{ c.role }}</p>
-              <div style="display:flex;flex-direction:column;gap:12px;margin-bottom:20px;flex:1">
-                <div style="display:flex;gap:12px"><span style="flex:none;width:64px;font-size:10px;font-weight:700;color:#A6763C;text-transform:uppercase;letter-spacing:.1em;padding-top:2px">Problem</span><p style="margin:0;font-size:14px;color:#57524A;line-height:1.55">{{ c.problem }}</p></div>
-                <div style="display:flex;gap:12px"><span style="flex:none;width:64px;font-size:10px;font-weight:700;color:#16302B;text-transform:uppercase;letter-spacing:.1em;padding-top:2px">Design</span><p style="margin:0;font-size:14px;color:#57524A;line-height:1.55">{{ c.solution }}</p></div>
-              </div>
-              <div style="display:flex;align-items:flex-end;justify-content:space-between;gap:12px;padding-top:18px;border-top:1px solid #E0D9CC">
-                <div><div style="font-family:'Newsreader',Georgia,serif;font-size:30px;font-weight:500;color:#16302B;line-height:1">{{ c.metric }}</div><div style="font-size:11px;color:#8A8377;font-weight:600;margin-top:3px">{{ c.metricLabel }}</div></div>
-                <span style="display:flex;gap:6px;flex-wrap:wrap;justify-content:flex-end;max-width:55%">
-                  <sc-for list="{{ c.stack }}" as="s" hint-placeholder-count="2"><span style="font-size:10.5px;font-weight:600;color:#57524A;background:#EFEAE0;padding:4px 9px;border-radius:3px">{{ s }}</span></sc-for>
-                </span>
-              </div>
-            </div>
-          </article>
-        </sc-for>
-      </div>
-    </div>
-  </section>
-
-  <!-- ============ SKILLS → REQUIREMENTS ============ -->
-  <section id="skills" style="scroll-margin-top:80px;padding:88px 0;margin-top:68px;background:#FBFAF6;border-top:1px solid #E0D9CC;border-bottom:1px solid #E0D9CC">
-    <div style="max-width:1160px;margin:0 auto;padding:0 32px">
-      <div data-reveal style="margin-bottom:44px">
-        <div style="display:flex;align-items:center;gap:14px;margin-bottom:20px">
-          <span style="font-family:'Newsreader',serif;font-size:15px;color:#A6763C">02</span>
-          <span style="font-size:11px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:#6E685E">The brief, answered</span>
-          <span style="flex:1;height:1px;background:#E0D9CC"></span>
-        </div>
-        <h2 style="margin:0 0 12px;font-family:'Newsreader',Georgia,serif;font-size:clamp(30px,4vw,46px);font-weight:500;letter-spacing:-.015em;line-height:1.05;max-width:20ch">Every requirement, with proof</h2>
-        <p style="margin:0;font-size:16px;color:#57524A;max-width:60ch;line-height:1.6">Mapped one-to-one against the role's must-haves and nice-to-haves — with the example that backs each up.</p>
-      </div>
-      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:#E0D9CC;border:1px solid #E0D9CC;border-radius:8px;overflow:hidden" data-skillgrid>
-        <sc-for list="{{ reqs }}" as="r" hint-placeholder-count="9">
-          <div data-reveal style="background:#F3F0E9;padding:28px 26px;transition:background .25s">
-            <div style="display:flex;align-items:baseline;justify-content:space-between;margin-bottom:16px">
-              <span style="font-family:'Newsreader',Georgia,serif;font-size:26px;font-weight:500;color:#A6763C;line-height:1">{{ r.no }}</span>
-              <span style="font-size:10px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#8A8377">{{ r.kind }}</span>
-            </div>
-            <h3 style="margin:0 0 9px;font-size:16px;font-weight:700;color:#1C1A17;line-height:1.3">{{ r.title }}</h3>
-            <p style="margin:0 0 16px;font-size:13.5px;color:#57524A;line-height:1.55">{{ r.proof }}</p>
-            <div style="display:flex;align-items:center;gap:8px;font-size:12px;font-weight:600;color:#16302B;padding-top:14px;border-top:1px solid #E0D9CC"><span style="color:#A6763C">→</span>{{ r.example }}</div>
-          </div>
-        </sc-for>
+        <span>After Effects</span><span style="color:#D2CABA">/</span><span>Illustrator</span><span style="color:#D2CABA">/</span><span>Photoshop</span><span style="color:#D2CABA">/</span><span>Figma</span><span style="color:#D2CABA">/</span><span>Motion systems</span><span style="color:#D2CABA">/</span><span>Design systems</span><span style="color:#D2CABA">/</span><span>Webflow</span><span style="color:#D2CABA">/</span><span>Contentful</span><span style="color:#D2CABA">/</span><span>Responsive web</span><span style="color:#D2CABA">/</span><span>AI workflows</span>
       </div>
     </div>
   </section>
@@ -312,12 +297,102 @@
     <div style="max-width:1160px;margin:0 auto;padding:0 32px">
       <div data-reveal style="margin-bottom:44px">
         <div style="display:flex;align-items:center;gap:14px;margin-bottom:20px">
-          <span style="font-family:'Newsreader',serif;font-size:15px;color:#C79A5E">03</span>
+          <span style="font-family:'Newsreader',serif;font-size:15px;color:#C79A5E">01</span>
           <span style="font-size:11px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:rgba(237,232,221,.6)">Motion &amp; interaction</span>
           <span style="flex:1;height:1px;background:rgba(237,232,221,.18)"></span>
         </div>
-        <h2 style="margin:0 0 12px;font-family:'Newsreader',Georgia,serif;font-size:clamp(30px,4vw,46px);font-weight:500;letter-spacing:-.015em;line-height:1.05;max-width:22ch">Micro-interactions, built to spec</h2>
-        <p style="margin:0;font-size:16px;color:rgba(237,232,221,.72);max-width:62ch;line-height:1.6">Live UI motion — handed to engineers with timing, easing, and states documented. Everything below is animating for real, not a video.</p>
+        <h2 style="margin:0 0 12px;font-family:'Newsreader',Georgia,serif;font-size:clamp(30px,4vw,46px);font-weight:500;letter-spacing:-.015em;line-height:1.05;max-width:22ch">Brand motion, and the interface motion under it</h2>
+        <p style="margin:0;font-size:16px;color:rgba(237,232,221,.72);max-width:62ch;line-height:1.6">Broadcast and social work animated in After Effects, plus the UI motion I spec for engineering. Two halves of the same practice - one sells the product, the other makes it usable.</p>
+      </div>
+      <!-- broadcast reel -->
+      <div data-reveal data-reelfeature style="margin-bottom:20px;border:1px solid rgba(237,232,221,.16);border-radius:10px;overflow:hidden;background:#0F2320">
+        <div data-yt="pWnjbYJ7pNE" style="position:relative;aspect-ratio:16/9;cursor:pointer;overflow:hidden;background:#0B1A18">
+          <img src="https://i.ytimg.com/vi/pWnjbYJ7pNE/maxresdefault.jpg" alt="BigBattery ETHOS marketing video" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.72;transition:transform .8s cubic-bezier(.22,.61,.36,1),opacity .5s" />
+          <span style="position:absolute;inset:0;background:linear-gradient(to top,rgba(11,26,24,.9),rgba(11,26,24,.15) 60%,rgba(11,26,24,.35))"></span>
+          <span data-playbtn data-featplay style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:74px;height:74px;border-radius:50%;background:rgba(199,154,94,.94);color:#16302B;display:flex;align-items:center;justify-content:center;font-size:22px;padding-left:5px;transition:transform .45s cubic-bezier(.34,1.56,.64,1)">&#9654;</span>
+          <span data-featcap style="position:absolute;left:24px;bottom:22px;right:24px;display:flex;align-items:flex-end;justify-content:space-between;gap:18px;flex-wrap:wrap">
+            <span>
+              <span style="display:block;font-size:10px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:#C79A5E;margin-bottom:7px">Featured &middot; Brand film</span>
+              <span style="display:block;font-family:'Newsreader',Georgia,serif;font-size:clamp(20px,2.4vw,30px);font-weight:500;color:#F3F0E9;line-height:1.15">BigBattery ETHOS marketing video</span>
+            </span>
+            <span style="font-size:11.5px;font-weight:600;color:rgba(237,232,221,.62);white-space:nowrap">After Effects &middot; Illustrator</span>
+          </span>
+        </div>
+        <div style="padding:20px 24px 22px;display:flex;gap:26px;justify-content:space-between;flex-wrap:wrap;align-items:flex-start">
+          <p style="margin:0;font-size:14.5px;color:rgba(237,232,221,.76);line-height:1.6;max-width:62ch">A full brand film for the ETHOS home-battery line. Product renders, capacity build-ups, and installation sequences timed so a technical product reads as approachable rather than industrial.</p>
+          <span style="display:flex;gap:8px;flex-wrap:wrap">
+            <span style="font-size:10.5px;font-weight:600;color:#C79A5E;border:1px solid rgba(199,154,94,.45);padding:5px 10px;border-radius:3px">After Effects</span>
+            <span style="font-size:10.5px;font-weight:600;color:#C79A5E;border:1px solid rgba(199,154,94,.45);padding:5px 10px;border-radius:3px">Illustrator</span>
+            <span style="font-size:10.5px;font-weight:600;color:rgba(237,232,221,.66);border:1px solid rgba(237,232,221,.2);padding:5px 10px;border-radius:3px">Product render</span>
+            <span style="font-size:10.5px;font-weight:600;color:rgba(237,232,221,.66);border:1px solid rgba(237,232,221,.2);padding:5px 10px;border-radius:3px">2D graphics</span>
+          </span>
+        </div>
+      </div>
+
+      <div data-reveal style="display:flex;align-items:center;gap:12px;margin:34px 0 18px">
+        <span style="font-size:10.5px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:rgba(237,232,221,.55)">Social reels</span>
+        <span style="flex:1;height:1px;background:rgba(237,232,221,.14)"></span>
+        <span style="font-size:11.5px;color:rgba(237,232,221,.42)">Published on Facebook</span>
+      </div>
+      <div style="display:grid;grid-template-columns:1.1fr 1fr;gap:20px;margin-bottom:26px;align-items:stretch" data-socialrow>
+        <sc-for list="{{ socialTall }}" as="r" hint-placeholder-count="1">
+          <div data-reveal onMouseEnter="{{ darkEnter }}" onMouseLeave="{{ darkLeave }}" style="background:rgba(255,255,255,.04);border:1px solid rgba(237,232,221,.14);border-radius:8px;overflow:hidden;display:flex;flex-direction:column">
+            {{ r.media }}
+            <div style="padding:16px 18px 18px;display:flex;flex-direction:column;flex:1">
+              <div style="font-size:9.5px;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:#C79A5E;margin-bottom:7px">{{ r.kind }}</div>
+              <div style="font-size:15px;font-weight:600;color:#F3F0E9;line-height:1.3;margin-bottom:6px">{{ r.title }}</div>
+              <p style="margin:0 0 14px;font-size:13px;color:rgba(237,232,221,.7);line-height:1.55;flex:1">{{ r.desc }}</p>
+              <div style="display:flex;align-items:center;gap:7px;flex-wrap:wrap;padding-top:12px;border-top:1px solid rgba(237,232,221,.14)">
+                <span style="font-size:10px;font-weight:600;color:#C79A5E;border:1px solid rgba(199,154,94,.4);padding:4px 9px;border-radius:3px">{{ r.tool }}</span>
+                <span style="font-size:10px;font-weight:600;color:rgba(237,232,221,.6);border:1px solid rgba(237,232,221,.18);padding:4px 9px;border-radius:3px">{{ r.technique }}</span>
+              </div>
+            </div>
+          </div>
+        </sc-for>
+        <div data-socialstack style="display:flex;flex-direction:column;gap:20px;height:100%">
+        <sc-for list="{{ socialWide }}" as="r" hint-placeholder-count="2">
+          <div data-reveal onMouseEnter="{{ darkEnter }}" onMouseLeave="{{ darkLeave }}" style="background:rgba(255,255,255,.04);border:1px solid rgba(237,232,221,.14);border-radius:8px;overflow:hidden;display:flex;flex-direction:column;flex:1">
+            {{ r.media }}
+            <div style="padding:16px 18px 18px;display:flex;flex-direction:column;flex:1">
+              <div style="font-size:9.5px;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:#C79A5E;margin-bottom:7px">{{ r.kind }}</div>
+              <div style="font-size:15px;font-weight:600;color:#F3F0E9;line-height:1.3;margin-bottom:6px">{{ r.title }}</div>
+              <p style="margin:0 0 14px;font-size:13px;color:rgba(237,232,221,.7);line-height:1.55;flex:1">{{ r.desc }}</p>
+              <div style="display:flex;align-items:center;gap:7px;flex-wrap:wrap;padding-top:12px;border-top:1px solid rgba(237,232,221,.14)">
+                <span style="font-size:10px;font-weight:600;color:#C79A5E;border:1px solid rgba(199,154,94,.4);padding:4px 9px;border-radius:3px">{{ r.tool }}</span>
+                <span style="font-size:10px;font-weight:600;color:rgba(237,232,221,.6);border:1px solid rgba(237,232,221,.18);padding:4px 9px;border-radius:3px">{{ r.technique }}</span>
+              </div>
+            </div>
+          </div>
+        </sc-for>
+        </div>
+      </div>
+
+      <div data-reveal style="display:flex;align-items:center;gap:12px;margin:34px 0 18px">
+        <span style="font-size:10.5px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:rgba(237,232,221,.55)">Explainers</span>
+        <span style="flex:1;height:1px;background:rgba(237,232,221,.14)"></span>
+        <span style="font-size:11.5px;color:rgba(237,232,221,.42)">Published on YouTube</span>
+      </div>
+      <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:20px;margin-bottom:26px" data-reelgrid>
+        <sc-for list="{{ reel }}" as="r" hint-placeholder-count="2">
+          <div data-reveal onMouseEnter="{{ darkEnter }}" onMouseLeave="{{ darkLeave }}" style="background:rgba(255,255,255,.04);border:1px solid rgba(237,232,221,.14);border-radius:8px;overflow:hidden;display:flex;flex-direction:column">
+            {{ r.media }}
+            <div style="padding:16px 18px 18px;display:flex;flex-direction:column;flex:1">
+              <div style="font-size:9.5px;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:#C79A5E;margin-bottom:7px">{{ r.kind }}</div>
+              <div style="font-size:15px;font-weight:600;color:#F3F0E9;line-height:1.3;margin-bottom:6px">{{ r.title }}</div>
+              <p style="margin:0 0 14px;font-size:13px;color:rgba(237,232,221,.7);line-height:1.55;flex:1">{{ r.desc }}</p>
+              <div style="display:flex;align-items:center;gap:7px;flex-wrap:wrap;padding-top:12px;border-top:1px solid rgba(237,232,221,.14)">
+                <span style="font-size:10px;font-weight:600;color:#C79A5E;border:1px solid rgba(199,154,94,.4);padding:4px 9px;border-radius:3px">{{ r.tool }}</span>
+                <span style="font-size:10px;font-weight:600;color:rgba(237,232,221,.6);border:1px solid rgba(237,232,221,.18);padding:4px 9px;border-radius:3px">{{ r.technique }}</span>
+              </div>
+            </div>
+          </div>
+        </sc-for>
+      </div>
+
+      <div data-reveal style="display:flex;align-items:center;gap:14px;margin:52px 0 24px">
+        <span style="font-size:11px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:rgba(237,232,221,.6)">Interface motion</span>
+        <span style="flex:1;height:1px;background:rgba(237,232,221,.18)"></span>
+        <span style="font-size:12px;color:rgba(237,232,221,.5)">Scrub any card to inspect the curve</span>
       </div>
       <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:20px" data-motiongrid>
         <div data-reveal data-scrub="2600" data-ease="cubic-bezier(.22,.61,.36,1)" style="background:rgba(255,255,255,.04);border:1px solid rgba(237,232,221,.14);border-radius:8px;padding:26px 20px;text-align:center">
@@ -367,17 +442,272 @@
     </div>
   </section>
 
+  <!-- ============ MOTION SYSTEM ============ -->
+  <section id="motionsystem" style="scroll-margin-top:80px;padding:88px 0;background:#FBFAF6;border-top:1px solid #E0D9CC;border-bottom:1px solid #E0D9CC">
+    <div style="max-width:1160px;margin:0 auto;padding:0 32px">
+      <div data-reveal style="margin-bottom:44px">
+        <div style="display:flex;align-items:center;gap:14px;margin-bottom:20px">
+          <span style="font-family:'Newsreader',serif;font-size:15px;color:#A6763C">02</span>
+          <span style="font-size:11px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:#6E685E">Motion system</span>
+          <span style="flex:1;height:1px;background:#E0D9CC"></span>
+        </div>
+        <h2 style="margin:0 0 12px;font-family:'Newsreader',Georgia,serif;font-size:clamp(30px,4vw,46px);font-weight:500;letter-spacing:-.015em;line-height:1.05;max-width:24ch">A motion language, not one-off animations</h2>
+        <p style="margin:0;font-size:16px;color:#57524A;max-width:66ch;line-height:1.6">Motion only scales when it is written down. This is the framework I hand to design and engineering teams: a duration scale, named easing tokens, choreography rules, and the platform and accessibility constraints that keep it usable.</p>
+      </div>
+
+      <div data-reveal style="margin-bottom:20px">
+        <div style="font-size:10px;font-weight:700;color:#8A8377;text-transform:uppercase;letter-spacing:.14em;margin-bottom:14px">Duration scale</div>
+        <div style="display:grid;grid-template-columns:repeat(5,1fr);gap:14px" data-durgrid>
+          <div style="background:#F3F0E9;border:1px solid #E0D9CC;border-radius:6px;padding:18px 20px">
+            <div style="font-family:'Newsreader',Georgia,serif;font-size:22px;font-weight:500;color:#1C1A17;line-height:1">80ms</div>
+            <div style="font-size:12.5px;font-weight:700;color:#16302B;text-transform:uppercase;letter-spacing:.1em;margin:7px 0 5px">Instant</div>
+            <div style="font-size:12.5px;color:#57524A;line-height:1.5">State flips, checkbox and toggle ticks.</div>
+          </div>
+          <div style="background:#F3F0E9;border:1px solid #E0D9CC;border-radius:6px;padding:18px 20px">
+            <div style="font-family:'Newsreader',Georgia,serif;font-size:22px;font-weight:500;color:#1C1A17;line-height:1">160ms</div>
+            <div style="font-size:12.5px;font-weight:700;color:#16302B;text-transform:uppercase;letter-spacing:.1em;margin:7px 0 5px">Quick</div>
+            <div style="font-size:12.5px;color:#57524A;line-height:1.5">Hovers, focus rings, small reveals.</div>
+          </div>
+          <div style="background:#F3F0E9;border:1px solid #E0D9CC;border-radius:6px;padding:18px 20px">
+            <div style="font-family:'Newsreader',Georgia,serif;font-size:22px;font-weight:500;color:#1C1A17;line-height:1">240ms</div>
+            <div style="font-size:12.5px;font-weight:700;color:#16302B;text-transform:uppercase;letter-spacing:.1em;margin:7px 0 5px">Base</div>
+            <div style="font-size:12.5px;color:#57524A;line-height:1.5">Default for most UI transitions.</div>
+          </div>
+          <div style="background:#F3F0E9;border:1px solid #E0D9CC;border-radius:6px;padding:18px 20px">
+            <div style="font-family:'Newsreader',Georgia,serif;font-size:22px;font-weight:500;color:#1C1A17;line-height:1">400ms</div>
+            <div style="font-size:12.5px;font-weight:700;color:#16302B;text-transform:uppercase;letter-spacing:.1em;margin:7px 0 5px">Considered</div>
+            <div style="font-size:12.5px;color:#57524A;line-height:1.5">Sheets, drawers, expanding cards.</div>
+          </div>
+          <div style="background:#F3F0E9;border:1px solid #E0D9CC;border-radius:6px;padding:18px 20px">
+            <div style="font-family:'Newsreader',Georgia,serif;font-size:22px;font-weight:500;color:#1C1A17;line-height:1">640ms</div>
+            <div style="font-size:12.5px;font-weight:700;color:#16302B;text-transform:uppercase;letter-spacing:.1em;margin:7px 0 5px">Narrative</div>
+            <div style="font-size:12.5px;color:#57524A;line-height:1.5">Page and hero choreography only.</div>
+          </div>
+        </div>
+        <p style="margin:14px 0 0;font-size:13px;color:#8A8377;line-height:1.55">Rule of thumb: distance travelled sets duration, not importance. Anything over 640ms in product UI needs a reason.</p>
+      </div>
+
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-top:44px" data-mssplit>
+        <div data-reveal style="background:#F3F0E9;border:1px solid #E0D9CC;border-radius:8px;padding:26px 28px">
+          <div style="font-size:10px;font-weight:700;color:#8A8377;text-transform:uppercase;letter-spacing:.14em;margin-bottom:6px">Easing tokens</div>
+          <div style="display:flex;align-items:center;gap:16px;padding:14px 0;border-bottom:1px solid #E0D9CC">
+            <svg width="52" height="52" viewBox="0 0 52 52" fill="none" style="flex:none;background:#F3F0E9;border-radius:5px">
+              <path d="M4 48 L48 4" stroke="#D2CABA" stroke-width="1" stroke-dasharray="3 3"></path>
+              <path d="M4 48 C 17 20, 30 6, 48 4" stroke="#A6763C" stroke-width="2" stroke-linecap="round"></path>
+            </svg>
+            <div style="flex:1;min-width:0">
+              <div style="font-size:13.5px;font-weight:700;color:#1C1A17">ease-standard</div>
+              <div style="font-size:11.5px;color:#8A8377;font-family:ui-monospace,SFMono-Regular,Menlo,monospace;margin:2px 0 3px;word-break:break-all">cubic-bezier(.22,.61,.36,1)</div>
+              <div style="font-size:12.5px;color:#57524A;line-height:1.45">Default. Anything entering or moving within the frame.</div>
+            </div>
+          </div>
+          <div style="display:flex;align-items:center;gap:16px;padding:14px 0;border-bottom:1px solid #E0D9CC">
+            <svg width="52" height="52" viewBox="0 0 52 52" fill="none" style="flex:none;background:#F3F0E9;border-radius:5px">
+              <path d="M4 48 L48 4" stroke="#D2CABA" stroke-width="1" stroke-dasharray="3 3"></path>
+              <path d="M4 48 C 12 44, 30 30, 48 4" stroke="#A6763C" stroke-width="2" stroke-linecap="round"></path>
+            </svg>
+            <div style="flex:1;min-width:0">
+              <div style="font-size:13.5px;font-weight:700;color:#1C1A17">ease-exit</div>
+              <div style="font-size:11.5px;color:#8A8377;font-family:ui-monospace,SFMono-Regular,Menlo,monospace;margin:2px 0 3px;word-break:break-all">cubic-bezier(.55,0,1,.45)</div>
+              <div style="font-size:12.5px;color:#57524A;line-height:1.45">Elements leaving. Accelerates away, no deceleration.</div>
+            </div>
+          </div>
+          <div style="display:flex;align-items:center;gap:16px;padding:14px 0;border-bottom:1px solid #E0D9CC">
+            <svg width="52" height="52" viewBox="0 0 52 52" fill="none" style="flex:none;background:#F3F0E9;border-radius:5px">
+              <path d="M4 48 L48 4" stroke="#D2CABA" stroke-width="1" stroke-dasharray="3 3"></path>
+              <path d="M4 48 C 10 12, 22 5, 48 4" stroke="#A6763C" stroke-width="2" stroke-linecap="round"></path>
+            </svg>
+            <div style="flex:1;min-width:0">
+              <div style="font-size:13.5px;font-weight:700;color:#1C1A17">ease-emphasis</div>
+              <div style="font-size:11.5px;color:#8A8377;font-family:ui-monospace,SFMono-Regular,Menlo,monospace;margin:2px 0 3px;word-break:break-all">cubic-bezier(.19,1,.22,1)</div>
+              <div style="font-size:12.5px;color:#57524A;line-height:1.45">Hero moments and shared-element transitions.</div>
+            </div>
+          </div>
+          <div style="display:flex;align-items:center;gap:16px;padding:14px 0;border-bottom:1px solid #E0D9CC">
+            <svg width="52" height="52" viewBox="0 0 52 52" fill="none" style="flex:none;background:#F3F0E9;border-radius:5px">
+              <path d="M4 48 L48 4" stroke="#D2CABA" stroke-width="1" stroke-dasharray="3 3"></path>
+              <path d="M4 48 C 16 10, 26 -2, 48 6" stroke="#A6763C" stroke-width="2" stroke-linecap="round"></path>
+            </svg>
+            <div style="flex:1;min-width:0">
+              <div style="font-size:13.5px;font-weight:700;color:#1C1A17">ease-spring</div>
+              <div style="font-size:11.5px;color:#8A8377;font-family:ui-monospace,SFMono-Regular,Menlo,monospace;margin:2px 0 3px;word-break:break-all">cubic-bezier(.34,1.56,.64,1)</div>
+              <div style="font-size:12.5px;color:#57524A;line-height:1.45">Toasts and confirmations. Slight overshoot, used sparingly.</div>
+            </div>
+          </div>
+          <div style="font-size:12.5px;color:#8A8377;margin-top:14px;line-height:1.55">Four tokens, no ad-hoc curves. Named in Figma variables and mirrored to code so design and build stay identical.</div>
+        </div>
+        <div data-reveal style="background:#F3F0E9;border:1px solid #E0D9CC;border-radius:8px;padding:26px 28px">
+          <div style="font-size:10px;font-weight:700;color:#8A8377;text-transform:uppercase;letter-spacing:.14em;margin-bottom:6px">Choreography rules</div>
+          <div style="display:flex;gap:16px;padding:18px 0;border-bottom:1px solid #E0D9CC">
+            <span style="font-family:'Newsreader',Georgia,serif;font-size:22px;font-weight:500;color:#A6763C;line-height:1;flex:none;width:30px">01</span>
+            <div>
+              <div style="font-size:14.5px;font-weight:700;color:#1C1A17;margin-bottom:4px">Motion follows intent</div>
+              <div style="font-size:13.5px;color:#57524A;line-height:1.6">Direction reflects the mental model. A drawer returns the way it came; a step forward moves forward.</div>
+            </div>
+          </div>
+          <div style="display:flex;gap:16px;padding:18px 0;border-bottom:1px solid #E0D9CC">
+            <span style="font-family:'Newsreader',Georgia,serif;font-size:22px;font-weight:500;color:#A6763C;line-height:1;flex:none;width:30px">02</span>
+            <div>
+              <div style="font-size:14.5px;font-weight:700;color:#1C1A17;margin-bottom:4px">Stagger, never swarm</div>
+              <div style="font-size:13.5px;color:#57524A;line-height:1.6">Grouped items enter 60-80ms apart, capped at six. Beyond that the group animates as one object.</div>
+            </div>
+          </div>
+          <div style="display:flex;gap:16px;padding:18px 0;border-bottom:1px solid #E0D9CC">
+            <span style="font-family:'Newsreader',Georgia,serif;font-size:22px;font-weight:500;color:#A6763C;line-height:1;flex:none;width:30px">03</span>
+            <div>
+              <div style="font-size:14.5px;font-weight:700;color:#1C1A17;margin-bottom:4px">One focal point</div>
+              <div style="font-size:13.5px;color:#57524A;line-height:1.6">Only one element owns the eye per transition. Everything else supports or holds still.</div>
+            </div>
+          </div>
+          <div style="display:flex;gap:16px;padding:18px 0;border-bottom:1px solid #E0D9CC">
+            <span style="font-family:'Newsreader',Georgia,serif;font-size:22px;font-weight:500;color:#A6763C;line-height:1;flex:none;width:30px">04</span>
+            <div>
+              <div style="font-size:14.5px;font-weight:700;color:#1C1A17;margin-bottom:4px">Exit faster than entry</div>
+              <div style="font-size:13.5px;color:#57524A;line-height:1.6">Leaving is roughly two-thirds the entry duration. Users have already decided.</div>
+            </div>
+          </div>
+          <div style="font-size:12.5px;color:#8A8377;margin-top:14px;line-height:1.55">These are the rules this site is built on - every transition here traces back to one of them.</div>
+        </div>
+      </div>
+
+      <div data-reveal style="margin-top:24px;background:#16302B;color:#EDE8DD;border-radius:8px;padding:28px 30px">
+        <div style="font-size:10px;font-weight:700;color:#C79A5E;text-transform:uppercase;letter-spacing:.14em;margin-bottom:16px">Platform &amp; accessibility constraints</div>
+        <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:26px" data-msplat>
+          <div>
+            <div style="font-size:14px;font-weight:700;margin-bottom:6px">Reduced motion is a first-class state</div>
+            <div style="font-size:13.5px;color:rgba(237,232,221,.72);line-height:1.6">Every animation ships with a reduced-motion equivalent - opacity or an instant state change, never a dropped affordance. Specified at design time, not patched later.</div>
+          </div>
+          <div>
+            <div style="font-size:14px;font-weight:700;margin-bottom:6px">Built for the target runtime</div>
+            <div style="font-size:13.5px;color:rgba(237,232,221,.72);line-height:1.6">Transform and opacity only on the critical path. Specs are written around intent and timing, so the same motion survives whether it is built natively or in CSS.</div>
+          </div>
+          <div>
+            <div style="font-size:14px;font-weight:700;margin-bottom:6px">Named, versioned, findable</div>
+            <div style="font-size:13.5px;color:rgba(237,232,221,.72);line-height:1.6">Compositions follow <span style="font-family:ui-monospace,Menlo,monospace;font-size:12.5px;color:#C79A5E">surface-element-state-v</span>. Sources, exports, and specs live together, so any file can be picked up by someone else a year later.</div>
+          </div>
+          <div>
+            <div style="font-size:14px;font-weight:700;margin-bottom:6px">Documented for handoff</div>
+            <div style="font-size:13.5px;color:rgba(237,232,221,.72);line-height:1.6">Each interaction carries duration, easing token, delay, and trigger. Engineers implement from the spec without asking what it should feel like.</div>
+          </div>
+        </div>
+      </div>
+
+      <div data-reveal style="margin-top:44px;display:grid;grid-template-columns:.9fr 1.1fr;gap:44px;align-items:start" data-msprac>
+        <div>
+          <div style="font-size:10px;font-weight:700;color:#8A8377;text-transform:uppercase;letter-spacing:.14em;margin-bottom:14px">How I work</div>
+          <h3 style="margin:0 0 14px;font-family:'Newsreader',Georgia,serif;font-size:clamp(22px,2.6vw,30px);font-weight:500;line-height:1.15;color:#1C1A17;letter-spacing:-.01em">A system is only real once other people use it</h3>
+          <p style="margin:0;font-size:15px;color:#57524A;line-height:1.65">Writing the guidelines is the easy half. The work is getting a team to reach for them under deadline - which is a communication problem more than a design one.</p>
+        </div>
+        <div style="display:grid;gap:2px;background:#E0D9CC;border:1px solid #E0D9CC;border-radius:8px;overflow:hidden">
+          <div style="background:#F3F0E9;padding:20px 22px">
+            <div style="font-size:13.5px;font-weight:700;color:#1C1A17;margin-bottom:5px">Critique on the timeline, not the still</div>
+            <div style="font-size:13.5px;color:#57524A;line-height:1.6">Motion reviews run on loops and scrubbing, never screenshots. I bring two timing options rather than one, so the conversation is about which reads better instead of whether it works at all.</div>
+          </div>
+          <div style="background:#F3F0E9;padding:20px 22px">
+            <div style="font-size:13.5px;font-weight:700;color:#1C1A17;margin-bottom:5px">Ship the spec with the comp</div>
+            <div style="font-size:13.5px;color:#57524A;line-height:1.6">Engineers get duration, easing token, delay, trigger, and the reduced-motion fallback alongside the file. No implementation should require a meeting to interpret.</div>
+          </div>
+          <div style="background:#F3F0E9;padding:20px 22px">
+            <div style="font-size:13.5px;font-weight:700;color:#1C1A17;margin-bottom:5px">Argue in outcomes, not taste</div>
+            <div style="font-size:13.5px;color:#57524A;line-height:1.6">With stakeholders I frame motion as comprehension, perceived speed, and error recovery. “It feels nicer” loses the room; “this is why users think it is broken” does not.</div>
+          </div>
+          <div style="background:#F3F0E9;padding:20px 22px">
+            <div style="font-size:13.5px;font-weight:700;color:#1C1A17;margin-bottom:5px">Adoption over authorship</div>
+            <div style="font-size:13.5px;color:#57524A;line-height:1.6">I would rather four tokens get used everywhere than forty sit in a doc. Every addition to the system has to earn its place against the cost of one more thing to remember.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ SELECTED WORK ============ -->
+  <section id="work" style="scroll-margin-top:80px;padding:88px 0 20px">
+    <div style="max-width:1160px;margin:0 auto;padding:0 32px">
+      <div data-reveal style="margin-bottom:44px">
+        <div style="display:flex;align-items:center;gap:14px;margin-bottom:20px">
+          <span style="font-family:'Newsreader',serif;font-size:15px;color:#A6763C">03</span>
+          <span style="font-size:11px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:#6E685E">Selected work</span>
+          <span style="flex:1;height:1px;background:#E0D9CC"></span>
+        </div>
+        <h2 style="margin:0 0 12px;font-family:'Newsreader',Georgia,serif;font-size:clamp(30px,4vw,46px);font-weight:500;letter-spacing:-.015em;line-height:1.05;max-width:20ch">Case studies that moved the metric</h2>
+        <p style="margin:0;font-size:16px;color:#57524A;max-width:60ch;line-height:1.6">Six projects across web, digital, and email. Open any card for the full case study - problem, process, artifacts, and outcome.</p>
+      </div>
+      <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:24px" data-workgrid>
+        <sc-for list="{{ cases }}" as="c" hint-placeholder-count="6">
+          <article data-reveal data-open="case-{{ $index }}" onClick="{{ openDetail }}" onMouseEnter="{{ cardEnter }}" onMouseLeave="{{ cardLeave }}" style="display:flex;flex-direction:column;background:#FBFAF6;border:1px solid #E0D9CC;border-radius:8px;overflow:hidden;cursor:pointer;transition:transform .25s cubic-bezier(.22,.61,.36,1),box-shadow .25s cubic-bezier(.22,.61,.36,1),border-color .25s">
+            <div style="position:relative;height:212px;background:#EFEAE0;overflow:hidden;padding:20px 20px 0">
+              <span style="position:absolute;top:14px;left:14px;z-index:3;background:#FBFAF6;color:#16302B;font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:5px 10px;border-radius:3px;border:1px solid #E0D9CC">{{ c.tag }}</span>
+              <span style="position:absolute;top:14px;right:14px;z-index:3;background:rgba(22,48,43,.9);color:#F3F0E9;font-size:10px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;padding:5px 10px;border-radius:3px">View case →</span>
+              <sc-if value="{{ c.pageDemo }}" hint-placeholder-val="{{ false }}">
+                <div style="border-radius:8px 8px 0 0;overflow:hidden;box-shadow:0 -8px 30px rgba(28,26,23,.2);height:100%;display:flex">
+                  <dc-import name="DashboardMock" hint-size="100%,100%" style="width:100%"></dc-import>
+                </div>
+              </sc-if>
+              <sc-if value="{{ c.wire }}" hint-placeholder-val="{{ true }}">
+                <div style="border-radius:8px 8px 0 0;overflow:hidden;box-shadow:0 -8px 30px rgba(28,26,23,.2);height:100%;display:flex">
+                  <dc-import name="ProjectScreen" variant="{{ c.screen }}" hint-size="100%,100%" style="width:100%"></dc-import>
+                </div>
+              </sc-if>
+            </div>
+            <div style="padding:24px 24px 26px;display:flex;flex-direction:column;flex:1;border-top:1px solid #E0D9CC">
+              <h3 style="margin:0 0 5px;font-family:'Newsreader',Georgia,serif;font-size:23px;font-weight:500;color:#1C1A17;letter-spacing:-.01em">{{ c.title }}</h3>
+              <p style="margin:0 0 18px;font-size:11px;color:#8A8377;font-weight:700;text-transform:uppercase;letter-spacing:.1em">{{ c.role }}</p>
+              <div style="display:flex;flex-direction:column;gap:12px;margin-bottom:20px;flex:1">
+                <div style="display:flex;gap:12px"><span style="flex:none;width:64px;font-size:10px;font-weight:700;color:#A6763C;text-transform:uppercase;letter-spacing:.1em;padding-top:2px">Problem</span><p style="margin:0;font-size:14px;color:#57524A;line-height:1.55">{{ c.problem }}</p></div>
+                <div style="display:flex;gap:12px"><span style="flex:none;width:64px;font-size:10px;font-weight:700;color:#16302B;text-transform:uppercase;letter-spacing:.1em;padding-top:2px">Design</span><p style="margin:0;font-size:14px;color:#57524A;line-height:1.55">{{ c.solution }}</p></div>
+              </div>
+              <div style="display:flex;align-items:flex-end;justify-content:space-between;gap:12px;padding-top:18px;border-top:1px solid #E0D9CC">
+                <div><div style="font-family:'Newsreader',Georgia,serif;font-size:30px;font-weight:500;color:#16302B;line-height:1">{{ c.metric }}</div><div style="font-size:11px;color:#8A8377;font-weight:600;margin-top:3px">{{ c.metricLabel }}</div></div>
+                <span style="display:flex;gap:6px;flex-wrap:wrap;justify-content:flex-end;max-width:55%">
+                  <sc-for list="{{ c.stack }}" as="s" hint-placeholder-count="2"><span style="font-size:10.5px;font-weight:600;color:#57524A;background:#EFEAE0;padding:4px 9px;border-radius:3px">{{ s }}</span></sc-for>
+                </span>
+              </div>
+            </div>
+          </article>
+        </sc-for>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ SKILLS → REQUIREMENTS ============ -->
+  <section id="skills" style="scroll-margin-top:80px;padding:88px 0;margin-top:68px;background:#FBFAF6;border-top:1px solid #E0D9CC;border-bottom:1px solid #E0D9CC">
+    <div style="max-width:1160px;margin:0 auto;padding:0 32px">
+      <div data-reveal style="margin-bottom:44px">
+        <div style="display:flex;align-items:center;gap:14px;margin-bottom:20px">
+          <span style="font-family:'Newsreader',serif;font-size:15px;color:#A6763C">04</span>
+          <span style="font-size:11px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:#6E685E">The brief, answered</span>
+          <span style="flex:1;height:1px;background:#E0D9CC"></span>
+        </div>
+        <h2 style="margin:0 0 12px;font-family:'Newsreader',Georgia,serif;font-size:clamp(30px,4vw,46px);font-weight:500;letter-spacing:-.015em;line-height:1.05;max-width:20ch">Every requirement, with proof</h2>
+        <p style="margin:0;font-size:16px;color:#57524A;max-width:60ch;line-height:1.6">Mapped one-to-one against what the role asks for, with the example on this site that backs each up.</p>
+      </div>
+      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:#E0D9CC;border:1px solid #E0D9CC;border-radius:8px;overflow:hidden" data-skillgrid>
+        <sc-for list="{{ reqs }}" as="r" hint-placeholder-count="9">
+          <div data-reveal style="background:#F3F0E9;padding:28px 26px;transition:background .25s">
+            <div style="display:flex;align-items:baseline;justify-content:space-between;margin-bottom:16px">
+              <span style="font-family:'Newsreader',Georgia,serif;font-size:26px;font-weight:500;color:#A6763C;line-height:1">{{ r.no }}</span>
+              <span style="font-size:10px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#8A8377">{{ r.kind }}</span>
+            </div>
+            <h3 style="margin:0 0 9px;font-size:16px;font-weight:700;color:#1C1A17;line-height:1.3">{{ r.title }}</h3>
+            <p style="margin:0 0 16px;font-size:13.5px;color:#57524A;line-height:1.55">{{ r.proof }}</p>
+            <div style="display:flex;align-items:center;gap:8px;font-size:12px;font-weight:600;color:#16302B;padding-top:14px;border-top:1px solid #E0D9CC"><span style="color:#A6763C">→</span>{{ r.example }}</div>
+          </div>
+        </sc-for>
+      </div>
+    </div>
+  </section>
+
   <!-- ============ DESIGN SYSTEM SHOWCASE ============ -->
   <section id="system" style="scroll-margin-top:80px;padding:88px 0;background:#F3F0E9">
     <div style="max-width:1160px;margin:0 auto;padding:0 32px">
       <div data-reveal style="margin-bottom:44px">
         <div style="display:flex;align-items:center;gap:14px;margin-bottom:20px">
-          <span style="font-family:'Newsreader',serif;font-size:15px;color:#A6763C">04</span>
+          <span style="font-family:'Newsreader',serif;font-size:15px;color:#A6763C">05</span>
           <span style="font-size:11px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:#6E685E">Design systems</span>
           <span style="flex:1;height:1px;background:#E0D9CC"></span>
         </div>
         <h2 style="margin:0 0 12px;font-family:'Newsreader',Georgia,serif;font-size:clamp(30px,4vw,46px);font-weight:500;letter-spacing:-.015em;line-height:1.05;max-width:22ch">The system behind this page</h2>
-        <p style="margin:0;font-size:16px;color:#57524A;max-width:62ch;line-height:1.6">Tokens, type, and components documented in Figma and mirrored 1:1 in code — this very site runs on the same set.</p>
+        <p style="margin:0;font-size:16px;color:#57524A;max-width:62ch;line-height:1.6">Tokens, type, and components documented in Figma and mirrored 1:1 in code - this very site runs on the same set.</p>
       </div>
       <div style="display:grid;grid-template-columns:1.1fr 1fr;gap:24px" data-sysgrid>
         <div data-reveal style="background:#FBFAF6;border:1px solid #E0D9CC;border-radius:8px;padding:30px">
@@ -393,7 +723,7 @@
           <div style="display:flex;flex-direction:column;gap:10px">
             <div style="display:flex;align-items:baseline;gap:14px"><span style="font-family:'Newsreader',serif;font-size:32px;font-weight:500;color:#1C1A17;line-height:1">Display</span><span style="font-size:10.5px;color:#8A8377;font-weight:600">Newsreader 500 / 32</span></div>
             <div style="display:flex;align-items:baseline;gap:14px"><span style="font-size:19px;font-weight:700;color:#1C1A17">Heading</span><span style="font-size:10.5px;color:#8A8377;font-weight:600">Roboto 700 / 19</span></div>
-            <div style="display:flex;align-items:baseline;gap:14px"><span style="font-size:14px;font-weight:400;color:#57524A">Body copy — set at 14–16px</span><span style="font-size:10.5px;color:#8A8377;font-weight:600">Roboto 400 / 14</span></div>
+            <div style="display:flex;align-items:baseline;gap:14px"><span style="font-size:14px;font-weight:400;color:#57524A">Body copy - set at 14–16px</span><span style="font-size:10.5px;color:#8A8377;font-weight:600">Roboto 400 / 14</span></div>
           </div>
         </div>
         <div data-reveal style="background:#FBFAF6;border:1px solid #E0D9CC;border-radius:8px;padding:30px">
@@ -427,12 +757,12 @@
     <div style="max-width:1160px;margin:0 auto;padding:0 32px">
       <div data-reveal style="margin-bottom:44px">
         <div style="display:flex;align-items:center;gap:14px;margin-bottom:20px">
-          <span style="font-family:'Newsreader',serif;font-size:15px;color:#A6763C">05</span>
+          <span style="font-family:'Newsreader',serif;font-size:15px;color:#A6763C">06</span>
           <span style="font-size:11px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:#6E685E">Email design</span>
           <span style="flex:1;height:1px;background:#E0D9CC"></span>
         </div>
         <h2 style="margin:0 0 12px;font-family:'Newsreader',Georgia,serif;font-size:clamp(30px,4vw,46px);font-weight:500;letter-spacing:-.015em;line-height:1.05;max-width:22ch">Lifecycle &amp; promotional email</h2>
-        <p style="margin:0;font-size:16px;color:#57524A;max-width:64ch;line-height:1.6">Responsive, bulletproof HTML email. The first two are production sends I designed at BigBattery &amp; DeepCells — click to read the full template.</p>
+        <p style="margin:0;font-size:16px;color:#57524A;max-width:64ch;line-height:1.6">Responsive, bulletproof HTML email. The first two are production sends I designed at BigBattery &amp; DeepCells - click to read the full template.</p>
       </div>
       <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:24px" data-emailgrid>
         <sc-for list="{{ emails }}" as="e" hint-placeholder-count="5">
@@ -470,12 +800,12 @@
     <div style="max-width:1160px;margin:0 auto;padding:0 32px">
       <div data-reveal style="margin-bottom:30px">
         <div style="display:flex;align-items:center;gap:14px;margin-bottom:20px">
-          <span style="font-family:'Newsreader',serif;font-size:15px;color:#A6763C">06</span>
+          <span style="font-family:'Newsreader',serif;font-size:15px;color:#A6763C">07</span>
           <span style="font-size:11px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:#6E685E">Infographics &amp; motion</span>
           <span style="flex:1;height:1px;background:#E0D9CC"></span>
         </div>
         <h2 style="margin:0 0 12px;font-family:'Newsreader',Georgia,serif;font-size:clamp(30px,4vw,46px);font-weight:500;letter-spacing:-.015em;line-height:1.05;max-width:22ch">A library of marketing infographics</h2>
-        <p style="margin:0;font-size:16px;color:#57524A;max-width:64ch;line-height:1.6">Static infographics, animated explainers, and video I've designed for web and campaigns. Filter by format — click any piece to view it full-size.</p>
+        <p style="margin:0;font-size:16px;color:#57524A;max-width:64ch;line-height:1.6">Static infographics, animated explainers, and video I've designed for web and campaigns. Filter by format - click any piece to view it full-size.</p>
       </div>
       <div data-reveal style="display:flex;gap:10px;flex-wrap:wrap;margin-bottom:28px">
         <sc-for list="{{ filters }}" as="f" hint-placeholder-count="4">
@@ -510,7 +840,7 @@
     <div style="max-width:1160px;margin:0 auto;padding:0 32px">
       <div data-reveal style="margin-bottom:44px">
         <div style="display:flex;align-items:center;gap:14px;margin-bottom:20px">
-          <span style="font-family:'Newsreader',serif;font-size:15px;color:#A6763C">07</span>
+          <span style="font-family:'Newsreader',serif;font-size:15px;color:#A6763C">08</span>
           <span style="font-size:11px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:#6E685E">A/B testing &amp; results</span>
           <span style="flex:1;height:1px;background:#E0D9CC"></span>
         </div>
@@ -555,15 +885,15 @@
       </div>
       <div data-reveal>
         <div style="display:flex;align-items:center;gap:14px;margin-bottom:20px">
-          <span style="font-family:'Newsreader',serif;font-size:15px;color:#A6763C">08</span>
+          <span style="font-family:'Newsreader',serif;font-size:15px;color:#A6763C">09</span>
           <span style="font-size:11px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:#6E685E">About</span>
           <span style="flex:1;height:1px;background:#E0D9CC"></span>
         </div>
         <h2 style="margin:0 0 20px;font-family:'Newsreader',Georgia,serif;font-size:clamp(28px,3.6vw,42px);font-weight:500;letter-spacing:-.015em;line-height:1.08">A designer who ships, in the Bay Area</h2>
-        <p style="margin:0 0 16px;font-size:16.5px;color:#57524A;line-height:1.7">I'm a web marketing designer with eight years across digital, web, and product. I work where UX rigor meets brand craft — turning growth goals into responsive pages, lifecycle email, and design systems developers can ship without friction.</p>
-        <p style="margin:0 0 28px;font-size:16.5px;color:#57524A;line-height:1.7">I move fast in Figma, collaborate closely with engineering, and design with experimentation in mind. Lately I've been folding AI into my workflow to get from brief to production-ready faster — without cutting craft.</p>
+        <p style="margin:0 0 16px;font-size:16.5px;color:#57524A;line-height:1.7">I'm a motion and digital designer with eight years across product, web, and brand. I work where animation meets usability - giving interfaces a sense of cause and effect, and giving teams the timing, easing, and documentation to build it the same way twice.</p>
+        <p style="margin:0 0 28px;font-size:16.5px;color:#57524A;line-height:1.7">I animate in After Effects, design in Figma, and hand engineers specs rather than adjectives. Before motion I spent years on responsive web, email, and design systems, which is why I tend to think about animation as a system rather than a set of one-offs.</p>
         <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px">
-          <div style="background:#F3F0E9;border:1px solid #E0D9CC;border-radius:6px;padding:18px 20px"><div style="font-family:'Newsreader',Georgia,serif;font-size:20px;font-weight:500;color:#1C1A17">Figma · Webflow</div><div style="font-size:12.5px;color:#8A8377;font-weight:500;margin-top:2px">Contentful · Framer</div></div>
+          <div style="background:#F3F0E9;border:1px solid #E0D9CC;border-radius:6px;padding:18px 20px"><div style="font-family:'Newsreader',Georgia,serif;font-size:20px;font-weight:500;color:#1C1A17">After Effects · Figma</div><div style="font-size:12.5px;color:#8A8377;font-weight:500;margin-top:2px">Illustrator · Photoshop</div></div>
           <div style="background:#F3F0E9;border:1px solid #E0D9CC;border-radius:6px;padding:18px 20px"><div style="font-family:'Newsreader',Georgia,serif;font-size:20px;font-weight:500;color:#1C1A17">Remote-ready</div><div style="font-size:12.5px;color:#8A8377;font-weight:500;margin-top:2px">Bay Area · flexible hours</div></div>
         </div>
       </div>
@@ -575,7 +905,7 @@
     <div style="max-width:900px;margin:0 auto;padding:88px 32px;text-align:center" data-reveal>
       <div style="font-size:11px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:#C79A5E;margin-bottom:22px">Let's work together</div>
       <h2 style="margin:0 0 18px;font-family:'Newsreader',Georgia,serif;font-size:clamp(34px,5vw,58px);font-weight:500;letter-spacing:-.02em;line-height:1.04">Have something in mind? Let's talk.</h2>
-      <p style="margin:0 auto 36px;font-size:17px;color:rgba(237,232,221,.75);max-width:52ch;line-height:1.6">Whether it's a project, a role, or just an idea worth exploring — I'd love to hear about it.</p>
+      <p style="margin:0 auto 36px;font-size:17px;color:rgba(237,232,221,.75);max-width:52ch;line-height:1.6">Whether it's a project, a role, or just an idea worth exploring - I'd love to hear about it.</p>
       <div style="display:flex;gap:14px;flex-wrap:wrap;justify-content:center;margin-bottom:40px">
         <a href="mailto:kunjvyas26@gmail.com" style="display:inline-flex;align-items:center;gap:9px;background:#F3F0E9;color:#16302B;font-weight:600;font-size:15px;padding:16px 30px;border-radius:4px">Email me</a>
         <a href="tel:+16028495629" style="display:inline-flex;align-items:center;gap:9px;background:transparent;color:#EDE8DD;font-weight:500;font-size:15px;padding:16px 30px;border-radius:4px;border:1px solid rgba(237,232,221,.5)">Call / text</a>
@@ -592,7 +922,7 @@
   <footer style="background:#0F1F1B;color:#8fa197">
     <div style="max-width:1160px;margin:0 auto;padding:32px;display:flex;align-items:center;justify-content:space-between;gap:20px;flex-wrap:wrap">
       <span style="font-family:'Newsreader',Georgia,serif;font-weight:500;font-size:19px;color:#EDE8DD">Kunj Vyas<span style="color:#C79A5E">.</span></span>
-      <span style="font-size:12.5px;color:#6f8078">© 2026 Kunj Vyas · Senior Web Marketing Designer</span>
+      <span style="font-size:12.5px;color:#6f8078">© 2026 Kunj Vyas · Senior Motion Designer · Web Marketing Designer / AD</span>
     </div>
   </footer>
 
@@ -738,7 +1068,7 @@
       <div style="display:flex;align-items:center;justify-content:space-between;gap:14px;margin-bottom:12px">
         <div style="display:flex;align-items:center;gap:10px;color:#EDE8DD">
           <span style="font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;background:rgba(237,232,221,.14);padding:5px 11px;border-radius:3px">Live homepage · Northwind relaunch</span>
-          <span style="font-size:12.5px;color:rgba(237,232,221,.7);font-weight:500">Designed &amp; built by Kunj Vyas — swap for the shipped URL anytime</span>
+          <span style="font-size:12.5px;color:rgba(237,232,221,.7);font-weight:500">Designed &amp; built by Kunj Vyas - swap for the shipped URL anytime</span>
         </div>
         <button onClick="{{ closeDetail }}" aria-label="Close" style="flex:none;width:40px;height:40px;border-radius:50%;background:rgba(243,240,233,.92);color:#16302B;font-size:21px;font-weight:700;display:flex;align-items:center;justify-content:center;line-height:1">×</button>
       </div>
@@ -753,10 +1083,10 @@
 
 </div>
 </x-dc>
-<script type="text/x-dc" data-dc-script data-props="{&quot;introStyle&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;photo&quot;,&quot;wave&quot;,&quot;name&quot;],&quot;default&quot;:&quot;photo&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Intro curtain&quot;}}">
+<script type="text/x-dc" data-dc-script data-props="{&quot;introStyle&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;loader&quot;,&quot;photo&quot;,&quot;wave&quot;,&quot;name&quot;],&quot;default&quot;:&quot;loader&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Intro curtain&quot;}}">
 class Component extends DCLogic {
   rootRef = React.createRef();
-  state = { filter: "static", lb: null, menuOpen: false };
+  state = { filter: "animated", lb: null, menuOpen: false };
 
   renderVals() {
     const cardEnter = (e) => {
@@ -839,6 +1169,76 @@ class Component extends DCLogic {
     const closeDetail = (e) => { e.stopPropagation(); hide(e.currentTarget.closest("[data-detail]")); };    const backdropClose = (e) => { if (e.target === e.currentTarget) hide(e.currentTarget); };
     const noop = (e) => e.preventDefault();
     const stopEv = (e) => e.stopPropagation();
+    const darkEnter = (e) => {
+      const el = e.currentTarget;
+      el.style.transition = "transform .5s cubic-bezier(.19,1,.22,1),border-color .3s,background-color .3s";
+      el.style.transform = "translateY(-6px)";
+      el.style.borderColor = "rgba(199,154,94,.5)";
+      el.style.backgroundColor = "rgba(255,255,255,.07)";
+    };
+    const darkLeave = (e) => {
+      const el = e.currentTarget;
+      el.style.transform = "none";
+      el.style.borderColor = "rgba(237,232,221,.14)";
+      el.style.backgroundColor = "rgba(255,255,255,.04)";
+    };
+
+    const ytPoster = (id, alt) => React.createElement("div", {
+      "data-yt": id,
+      style: { position: "relative", aspectRatio: "16/9", cursor: "pointer", overflow: "hidden", background: "#0B1A18" },
+    }, [
+      React.createElement("img", { key: "i", src: "https://i.ytimg.com/vi/" + id + "/maxresdefault.jpg", alt: alt, style: { position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover", opacity: .72, transition: "transform .8s cubic-bezier(.22,.61,.36,1),opacity .5s" } }),
+      React.createElement("span", { key: "s", style: { position: "absolute", inset: 0, background: "linear-gradient(to top,rgba(11,26,24,.78),rgba(11,26,24,.1))" } }),
+      React.createElement("span", { key: "p", "data-playbtn": "", style: { position: "absolute", top: "50%", left: "50%", transform: "translate(-50%,-50%)", width: 50, height: 50, borderRadius: "50%", background: "rgba(199,154,94,.94)", color: "#16302B", display: "flex", alignItems: "center", justifyContent: "center", fontSize: 15, paddingLeft: 3, transition: "transform .45s cubic-bezier(.34,1.56,.64,1)" } }, "\u25B6"),
+    ]);
+
+    // real Facebook player: the post chrome is the credibility
+    const fbEmbed = (label, id, ratio) => React.createElement("div", {
+      "data-fb": id,
+      "data-ratio": ratio ? "wide" : "tall",
+      style: { position: "relative", aspectRatio: ratio || "9/16", overflow: "hidden", background: "#0B1A18", cursor: "pointer", borderBottom: "1px solid rgba(237,232,221,.12)" },
+    }, [
+      React.createElement("span", { key: "g", style: { position: "absolute", inset: 0, backgroundImage: "linear-gradient(rgba(237,232,221,.05) 1px,transparent 1px),linear-gradient(90deg,rgba(237,232,221,.05) 1px,transparent 1px)", backgroundSize: "26px 26px" } }),
+      React.createElement("span", { key: "t", style: { position: "absolute", top: "50%", left: 0, right: 0, transform: "translateY(-50%)", textAlign: "center", fontFamily: "'Newsreader',Georgia,serif", fontSize: 26, fontWeight: 500, color: "rgba(237,232,221,.3)" } }, label),
+      React.createElement("span", { key: "p", "data-playbtn": "", style: { position: "absolute", top: "50%", left: "50%", transform: "translate(-50%,-50%)", width: 52, height: 52, borderRadius: "50%", border: "1.5px solid rgba(199,154,94,.9)", color: "#C79A5E", display: "flex", alignItems: "center", justifyContent: "center", fontSize: 15, paddingLeft: 3, background: "rgba(15,35,32,.6)", transition: "transform .45s cubic-bezier(.34,1.56,.64,1)" } }, "\u25B6"),
+      React.createElement("span", { key: "l", style: { position: "absolute", top: 10, left: 10, fontSize: 9, fontWeight: 700, letterSpacing: ".1em", textTransform: "uppercase", color: "rgba(237,232,221,.75)", background: "rgba(11,26,24,.75)", padding: "4px 8px", borderRadius: 3 } }, "Facebook reel"),
+      // always reachable, even if the plugin never renders
+      React.createElement("a", { key: "e", href: "https://www.facebook.com/reel/" + id, target: "_blank", rel: "noopener noreferrer", onClick: (ev) => ev.stopPropagation(), style: { position: "absolute", bottom: 10, left: 10, zIndex: 3, fontSize: 10.5, fontWeight: 700, letterSpacing: ".06em", color: "#F3F0E9", background: "rgba(11,26,24,.82)", padding: "6px 11px", borderRadius: 4, textDecoration: "none" } }, "Open on Facebook \u2197"),
+    ]);
+
+    // link card, not a video poster: typographic until a real frame exists
+    const fbCard = (label, href) => React.createElement("a", {
+      href: href, target: "_blank", rel: "noopener noreferrer",
+      style: { position: "relative", display: "flex", alignItems: "center", justifyContent: "center", aspectRatio: "16/9", overflow: "hidden", textDecoration: "none", background: "linear-gradient(150deg,#0F2320,#132B27)", borderBottom: "1px solid rgba(237,232,221,.12)" },
+    }, [
+      React.createElement("span", { key: "g", style: { position: "absolute", inset: 0, backgroundImage: "linear-gradient(rgba(237,232,221,.05) 1px,transparent 1px),linear-gradient(90deg,rgba(237,232,221,.05) 1px,transparent 1px)", backgroundSize: "26px 26px" } }),
+      React.createElement("span", { key: "t", style: { position: "relative", fontFamily: "'Newsreader',Georgia,serif", fontSize: 26, fontWeight: 500, color: "rgba(237,232,221,.34)", letterSpacing: "-.01em" } }, label),
+      React.createElement("span", { key: "p", "data-playbtn": "", style: { position: "absolute", top: "50%", left: "50%", transform: "translate(-50%,-50%)", width: 50, height: 50, borderRadius: "50%", border: "1.5px solid rgba(199,154,94,.9)", color: "#C79A5E", display: "flex", alignItems: "center", justifyContent: "center", fontSize: 14, paddingLeft: 3, background: "rgba(15,35,32,.55)", transition: "transform .45s cubic-bezier(.34,1.56,.64,1)" } }, "\u25B6"),
+      React.createElement("span", { key: "l", style: { position: "absolute", top: 10, right: 10, fontSize: 9, fontWeight: 700, letterSpacing: ".1em", textTransform: "uppercase", color: "rgba(237,232,221,.72)", background: "rgba(11,26,24,.72)", padding: "4px 8px", borderRadius: 3 } }, "Watch on Facebook"),
+    ]);
+
+    const fbPoster = (img, alt, href) => React.createElement("a", {
+      href: href, target: "_blank", rel: "noopener noreferrer",
+      style: { position: "relative", display: "block", aspectRatio: "16/9", overflow: "hidden", background: "#0B1A18", textDecoration: "none" },
+    }, [
+      React.createElement("img", { key: "i", src: img, alt: alt, style: { position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover", opacity: .5, filter: "grayscale(.35)" } }),
+      React.createElement("span", { key: "s", style: { position: "absolute", inset: 0, background: "linear-gradient(to top,rgba(11,26,24,.82),rgba(11,26,24,.2))" } }),
+      React.createElement("span", { key: "p", "data-playbtn": "", style: { position: "absolute", top: "50%", left: "50%", transform: "translate(-50%,-50%)", width: 50, height: 50, borderRadius: "50%", border: "1.5px solid rgba(199,154,94,.9)", color: "#C79A5E", display: "flex", alignItems: "center", justifyContent: "center", fontSize: 14, paddingLeft: 3, transition: "transform .45s cubic-bezier(.34,1.56,.64,1)" } }, "\u25B6"),
+      React.createElement("span", { key: "l", style: { position: "absolute", top: 10, right: 10, fontSize: 9, fontWeight: 700, letterSpacing: ".1em", textTransform: "uppercase", color: "rgba(237,232,221,.72)", background: "rgba(11,26,24,.72)", padding: "4px 8px", borderRadius: 3 } }, "Watch on Facebook"),
+    ]);
+
+    const socialTall = [
+      { media: fbEmbed("Nexus", "3231092210408299"), kind: "Brand motion \u00b7 Social", title: "Nexus brand motion", desc: "Brand-language piece for the Nexus line. Built from owned product assets, timed for a sound-off vertical feed.", tool: "After Effects", technique: "Brand assets" },
+    ];
+    const socialWide = [
+      { media: fbEmbed("Eagle2", "2481864632318178", "16/9"), kind: "Product ad \u00b7 Golf", title: "EAGLE 2 golf cart battery", desc: "Product ad for the golf-cart line. Course footage cut against product renders, paced so the upgrade reads as relief rather than a list of specs, then a closing shot of a real eagle in flight - storytelling that promotes the product by name.", tool: "After Effects", technique: "Product render" },
+      { media: fbEmbed("Husky2", "863202716560617", "16/9"), kind: "Product ad \u00b7 Marine", title: "24V HUSKY 2 for trolling motors", desc: "Product ad for the marine line. Long, unhurried holds on open water and a slower cadence throughout, so the ad leaves you with the calm of a full day out rather than a runtime figure.", tool: "After Effects", technique: "Product render" },
+    ];
+
+    const reel = [
+      { media: ytPoster("WzNlCnEoRXA", "Solar calculator guide"), kind: "Explainer \u00b7 UI walkthrough", title: "Solar calculator guide", desc: "Animated walkthrough of the sizing calculator. Screen recordings restaged as motion so each input reads as cause and effect.", tool: "After Effects", technique: "UI motion" },
+      { media: ytPoster("jntifHnHYEU", "Product explanation video"), kind: "Explainer \u00b7 Technical", title: "Product explanation video", desc: "Technical explainer breaking down system components. Diagrammatic 2D motion doing the work a spec sheet cannot.", tool: "After Effects", technique: "2D graphics" },
+    ];
     const toggleMenu = () => this.setState((s) => ({ menuOpen: !s.menuOpen }));
     const closeMenu = () => this.setState({ menuOpen: false });
 
@@ -846,7 +1246,7 @@ class Component extends DCLogic {
       { src: "uploads/herocarousal.mp4", type: "video", title: "Hero carousel", tag: "Web hero · video" },
       { src: "uploads/nexus.png", type: "static", title: "NEXUS key features", tag: "Product infographic" },
       { src: "uploads/lowest.png", type: "static", title: "Lowest system price", tag: "Comparison" },
-      { src: "uploads/meterhome.png", type: "static", title: "MeterHome — smart, safe, reliable", tag: "Product" },
+      { src: "uploads/meterhome.png", type: "static", title: "MeterHome - smart, safe, reliable", tag: "Product" },
       { src: "uploads/marine.png", type: "static", title: "Marine-living energy", tag: "Application" },
       { src: "uploads/rain.gif", type: "animated", title: "Power stays on when storm strikes", tag: "Animated" },
       { src: "uploads/modular.png", type: "static", title: "Modular capacity · easiest install", tag: "Feature" },
@@ -857,24 +1257,24 @@ class Component extends DCLogic {
       { src: "uploads/eagle2.png", type: "static", title: "Built to serve, powered to last", tag: "Golf cart · EV" },
       { src: "uploads/48VINV.png", type: "static", title: "Power your essentials with confidence", tag: "Application" },
       { src: "uploads/280ahindoor.png", type: "static", title: "Lowest cost per kWh · indoor only", tag: "Comparison" },
-      { src: "uploads/314ah.png", type: "static", title: "EG4 indoor wallmount — key features", tag: "Product" },
+      { src: "uploads/314ah.png", type: "static", title: "EG4 indoor wallmount - key features", tag: "Product" },
       { src: "uploads/314ah2.png", type: "static", title: "Auto-ID plug & play", tag: "Feature" },
       { src: "uploads/314ah3.png", type: "static", title: "Built for longevity", tag: "Feature" },
       { src: "uploads/314ahfeatures.png", type: "static", title: "Plug-and-sync installation", tag: "Feature diagram" },
       { src: "uploads/314ahindoor.png", type: "static", title: "High-capacity indoor storage", tag: "Application" },
       { src: "uploads/appuse.png", type: "static", title: "Husky 2 smart monitoring app", tag: "App · product" },
       { src: "uploads/batterycompare.png", type: "static", title: "48V battery comparison", tag: "Comparison" },
-      { src: "uploads/eg4app.png", type: "static", title: "EG4 Connect — monitor from anywhere", tag: "App · product" },
+      { src: "uploads/eg4app.png", type: "static", title: "EG4 Connect - monitor from anywhere", tag: "App · product" },
       { src: "uploads/golf.png", type: "static", title: "Golf-grade power built to outlast", tag: "Golf cart" },
-      { src: "uploads/graph.png", type: "static", title: "Power life's special moments — range", tag: "Comparison" },
-      { src: "uploads/huskypointers.png", type: "static", title: "Husky 2 — engineered to outlast", tag: "Product" },
+      { src: "uploads/graph.png", type: "static", title: "Power life's special moments - range", tag: "Comparison" },
+      { src: "uploads/huskypointers.png", type: "static", title: "Husky 2 - engineered to outlast", tag: "Product" },
       { src: "uploads/indooress.png", type: "static", title: "Power that never sleeps", tag: "Application" },
-      { src: "uploads/ethosrain.gif", type: "animated", title: "ETHOS — power stays on in storms", tag: "Animated" },
+      { src: "uploads/ethosrain.gif", type: "animated", title: "ETHOS - power stays on in storms", tag: "Animated" },
       { src: "uploads/gridboss.gif", type: "animated", title: "GridBoss energy management hub", tag: "Animated" },
-      { src: "uploads/batterynotations.png", type: "static", title: "ETHOS — feature callouts", tag: "Product diagram" },
+      { src: "uploads/batterynotations.png", type: "static", title: "ETHOS - feature callouts", tag: "Product diagram" },
       { src: "uploads/certification.png", type: "static", title: "Certified to highest UL safety standards", tag: "Certification" },
       { src: "uploads/warranty.png", type: "static", title: "All-weather · 12-year US warranty", tag: "Feature" },
-      { src: "uploads/chart.gif", type: "animated", title: "Best price in America — price per kWh", tag: "Animated" },
+      { src: "uploads/chart.gif", type: "animated", title: "Best price in America - price per kWh", tag: "Animated" },
       { src: "uploads/snow.gif", type: "animated", title: "Power that endures every season", tag: "Animated" },
       { src: "uploads/IntoVideo.mp4", type: "video", title: "Intro film", tag: "Brand video" },
     ];
@@ -900,21 +1300,39 @@ class Component extends DCLogic {
     return {
       rootRef: this.rootRef,
       cardEnter, cardLeave, openDetail, closeDetail, backdropClose, noop, stopEv,
-      menuOpen: this.state.menuOpen, toggleMenu, closeMenu,
-      introPhoto: (this.props.introStyle || "photo") === "photo",
-      introWave: (this.props.introStyle || "photo") === "wave",
-      introGreeting: (this.props.introStyle || "photo") === "name" ? "Kunj Vyas" : "Hi, I'm Kunj",
+      menuOpen: this.state.menuOpen, toggleMenu, closeMenu, reel, socialTall, socialWide, darkEnter, darkLeave,
+      introPhoto: (this.props.introStyle || "loader") === "photo",
+      introWave: (this.props.introStyle || "loader") === "wave",
+      introLoader: (this.props.introStyle || "loader") === "loader",
+      introGreeting: (this.props.introStyle || "loader") === "name" ? "Kunj Vyas" : "Hi, I'm Kunj",
       filters, shownInfographics, setFilter, openLightbox, closeLightbox, gEnter, gLeave,
       lbOpen: !!lbItem, lbMedia, lbTitle: lbItem ? lbItem.title : "", lbTag: lbItem ? lbItem.tag : "",
       cases: [
+        {
+          pageDemo: false, wire: true, screen: "motion", tag: "Motion · Product UI",
+          title: "Onboarding loader, re-timed",
+          role: "Motion design · After Effects → spec",
+          roleFull: "Motion Designer", timeline: "3 weeks",
+          problem: "Users abandoned during a five-second data sync. The spinner gave no sense of progress, so a normal wait read as a frozen screen and support tickets blamed a bug that did not exist.",
+          solution: "A three-stage progressive loader: an immediate acknowledgement, a determinate bar tied to real fetch milestones, and a short success beat that hands off to the next screen.",
+          outcome: "Abandonment during sync fell 31% with no change to actual load time. The perceived wait, not the real one, was the problem.",
+          overview: "Nothing was slow - it only felt slow. I treated the wait as a designed moment rather than dead time, animating it in After Effects, then translating it into a spec engineering could implement without interpretation.",
+          process: [
+            { n: "1", step: "Diagnose the feel", text: "Recorded and scrubbed the existing flow frame by frame. The first 400ms had no feedback at all, which is where users decided it was broken." },
+            { n: "2", step: "Animate the intent", text: "Built the three-stage sequence in After Effects to find the timing by eye, then reduced it to four keyframed layers and a single easing token." },
+            { n: "3", step: "Spec for handoff", text: "Documented duration, easing, trigger, and the reduced-motion fallback per layer, and cut a reference render so build could be checked frame for frame against the comp." },
+          ],
+          results: [{ v: "-31%", l: "Sync abandonment" }, { v: "0ms", l: "Actual speed change" }, { v: "4", l: "States documented" }],
+          metric: "-31%", metricLabel: "Abandonment", stack: ["After Effects", "Figma"], tools: ["After Effects", "Illustrator", "Figma"],
+        },
         {
           pageDemo: true, wire: false, tag: "Web · Responsive",
           title: "SaaS marketing site relaunch", role: "Lead designer · Figma → Webflow",
           roleFull: "Lead Web Designer", timeline: "10 weeks",
           problem: "A dated marketing site with a 61% bounce rate, slow page loads, and copy that buried the value prop. Marketing couldn't update pages without engineering.",
-          solution: "A modular, responsive design system built in Figma and shipped in Webflow — sharper hierarchy, a benefit-led hero, and CMS-driven page building the team owns.",
+          solution: "A modular, responsive design system built in Figma and shipped in Webflow - sharper hierarchy, a benefit-led hero, and CMS-driven page building the team owns.",
           outcome: "Demo signups climbed 38% and bounce dropped to 42%. Marketing now ships new pages in hours, not sprints.",
-          overview: "The company's homepage was their #1 acquisition channel but hadn't been touched in three years. I led a full relaunch — research, IA, responsive design, and a component library the marketing team could self-serve.",
+          overview: "The company's homepage was their #1 acquisition channel but hadn't been touched in three years. I led a full relaunch - research, IA, responsive design, and a component library the marketing team could self-serve.",
           process: [
             { n: "1", step: "Audit & IA", text: "Heatmaps and funnel analysis showed drop-off above the fold. Rebuilt the information architecture around a single clear conversion path." },
             { n: "2", step: "Responsive system", text: "Designed a 12-column responsive grid with mobile-first components, auto-layout, and documented breakpoints from 360px to 1440px." },
@@ -929,7 +1347,7 @@ class Component extends DCLogic {
           roleFull: "Product Designer (UX/UI)", timeline: "6 weeks",
           problem: "43% of new users abandoned before reaching first value. The setup was a single long form with no guidance or sense of progress.",
           solution: "A progressive, chunked onboarding with inline guidance, smart defaults, thoughtful empty states, and a persistent progress indicator.",
-          outcome: "Drop-off fell 27% and time-to-first-value dropped by nearly half — validated through a clickable prototype before a line of code was written.",
+          outcome: "Drop-off fell 27% and time-to-first-value dropped by nearly half - validated through a clickable prototype before a line of code was written.",
           overview: "Activation was the biggest lever on retention. I reworked the entire first-run experience into a guided flow, prototyped it in Figma, and tested it with users before handing production-ready specs to engineering.",
           process: [
             { n: "1", step: "Flow mapping", text: "Mapped every step and the questions users actually needed answered, then cut the form from 14 fields to 6 with smart defaults." },
@@ -944,9 +1362,9 @@ class Component extends DCLogic {
           title: "Lifecycle email program", role: "Email design · templating",
           roleFull: "Email & Lifecycle Designer", timeline: "8 weeks",
           problem: "Every send was a one-off, one-size-fits-all promo. Engagement was flat and the team rebuilt each email from scratch.",
-          solution: "A segmented lifecycle program — welcome, win-back, and promo — on a bulletproof, dark-mode-safe modular template system marketers can assemble.",
+          solution: "A segmented lifecycle program - welcome, win-back, and promo - on a bulletproof, dark-mode-safe modular template system marketers can assemble.",
           outcome: "Email-attributed revenue grew 52% and production time per send dropped from days to under an hour.",
-          overview: "I designed the entire lifecycle email program from the template architecture up — responsive, accessible, and modular so the team could compose new campaigns from a kit of blocks.",
+          overview: "I designed the entire lifecycle email program from the template architecture up - responsive, accessible, and modular so the team could compose new campaigns from a kit of blocks.",
           process: [
             { n: "1", step: "Template architecture", text: "Built a modular block system (hero, product row, testimonial, CTA) tested across Outlook, Gmail, and Apple Mail." },
             { n: "2", step: "Lifecycle mapping", text: "Designed distinct welcome, win-back, and promo journeys mapped to user segments and triggers." },
@@ -960,7 +1378,7 @@ class Component extends DCLogic {
           title: "\"Voltage\" design system", role: "Systems · Figma variables",
           roleFull: "Design Systems Lead", timeline: "Ongoing",
           problem: "UI drifted across surfaces, handoff was slow, and engineers rebuilt the same components differently every time.",
-          solution: "A tokenized Figma library with variables, component APIs, and living documentation — mirrored 1:1 to code with engineering.",
+          solution: "A tokenized Figma library with variables, component APIs, and living documentation - mirrored 1:1 to code with engineering.",
           outcome: "New features ship roughly 3× faster and design/code parity issues in QA dropped dramatically.",
           overview: "I built and maintained 'Voltage,' the design system underpinning web and product. Figma variables map directly to CSS custom properties so what's designed is exactly what ships.",
           process: [
@@ -976,12 +1394,12 @@ class Component extends DCLogic {
           title: "Campaign landing pages", role: "Digital · motion · A/B",
           roleFull: "Campaign / Motion Designer", timeline: "Per campaign",
           problem: "Paid traffic hit generic pages and bounced. Landers were static and slow to spin up for each campaign.",
-          solution: "A kit of scroll-driven, motion-enhanced landing pages built and A/B tested in Webflow — each tuned to its ad's message.",
+          solution: "A kit of scroll-driven, motion-enhanced landing pages built and A/B tested in Webflow - each tuned to its ad's message.",
           outcome: "Average conversion rate rose 19%, with the motion-led variant consistently outperforming the static control.",
           overview: "I designed and built a system of high-converting campaign landing pages with tasteful scroll animation and message-match to the ad, then ran experiments to tune each one.",
           process: [
             { n: "1", step: "Message match", text: "Designed modular hero + proof + CTA blocks that map to each ad's promise for a seamless click-through." },
-            { n: "2", step: "Motion layer", text: "Added scroll-triggered reveals and micro-interactions with documented timing/easing — built directly in Webflow." },
+            { n: "2", step: "Motion layer", text: "Added scroll-triggered reveals and micro-interactions with documented timing/easing - built directly in Webflow." },
             { n: "3", step: "Test & iterate", text: "Ran A/B tests on hero, CTA copy, and layout; rolled winners into the shared lander kit." },
           ],
           results: [{ v: "+19%", l: "Conversion rate" }, { v: "6", l: "Campaigns shipped" }, { v: "+24%", l: "Scroll depth" }],
@@ -991,50 +1409,50 @@ class Component extends DCLogic {
           pageDemo: false, wire: true, screen: "content", tag: "AI Workflow",
           title: "AI-assisted content design", role: "Ops · AI workflows",
           roleFull: "Content Design (AI-in-the-loop)", timeline: "Ongoing",
-          problem: "Content design was the bottleneck — every landing page and email waited days on copy and layout drafts.",
+          problem: "Content design was the bottleneck - every landing page and email waited days on copy and layout drafts.",
           solution: "An AI-in-the-loop workflow: AI generates structured first drafts inside modeled Contentful content types, which I refine and art-direct to production.",
           outcome: "Design throughput roughly doubled while quality held, freeing time for higher-craft work.",
-          overview: "I designed a workflow that uses AI to accelerate — not replace — content design: structured prompts produce first-pass drafts inside a Contentful model, and I bring the craft, hierarchy, and brand.",
+          overview: "I designed a workflow that uses AI to accelerate - not replace - content design: structured prompts produce first-pass drafts inside a Contentful model, and I bring the craft, hierarchy, and brand.",
           process: [
             { n: "1", step: "Content modeling", text: "Modeled reusable content types in Contentful so structure, not just copy, is consistent and composable." },
             { n: "2", step: "Prompt system", text: "Built prompt templates that produce on-brand, structured first drafts mapped to those content types." },
-            { n: "3", step: "Human polish", text: "Art-directed, edited, and QA'd every output — AI does the scaffolding, I do the design." },
+            { n: "3", step: "Human polish", text: "Art-directed, edited, and QA'd every output - AI does the scaffolding, I do the design." },
           ],
           results: [{ v: "2×", l: "Throughput" }, { v: "-60%", l: "Draft time" }, { v: "100%", l: "Human-reviewed" }],
           metric: "2×", metricLabel: "Throughput", stack: ["Contentful", "AI"], tools: ["Contentful", "AI tools", "Figma"],
         },
       ],
       reqs: [
-        { no: "01", kind: "Must-have", title: "5–8 yrs digital / web / product design", proof: "8 years spanning marketing web, SaaS product UI, and digital campaigns end-to-end.", example: "About + work history" },
-        { no: "02", kind: "Must-have", title: "Strong UX/UI & responsive web", proof: "Mobile-first layouts, accessible components, tested across breakpoints.", example: "Onboarding & site relaunch" },
-        { no: "03", kind: "Must-have", title: "Expert Figma & design systems", proof: "Variables, auto-layout, component APIs, and documented libraries.", example: "\"Voltage\" system" },
-        { no: "04", kind: "Must-have", title: "Dev collaboration & production-ready assets", proof: "Clean handoff, specs, and 1:1 code parity — I sit close to engineering.", example: "This site: Figma → code" },
-        { no: "05", kind: "Must-have", title: "Portfolio: web, digital & email", proof: "Full-funnel samples across every channel the role touches.", example: "Work + Email galleries" },
-        { no: "06", kind: "Nice-to-have", title: "Motion design", proof: "Documented micro-interactions with timing & easing, handoff-ready.", example: "Motion reel" },
-        { no: "07", kind: "Nice-to-have", title: "Contentful / Webflow", proof: "Model content, build responsive pages, and hand marketers the keys.", example: "Landing pages + AI project" },
-        { no: "08", kind: "Nice-to-have", title: "A/B testing", proof: "Hypothesis-driven variants shipped to statistical significance.", example: "Results section" },
-        { no: "09", kind: "Nice-to-have", title: "AI-powered design workflows", proof: "AI-in-the-loop from brief to production to move faster, not sloppier.", example: "AI content design" },
+        { no: "01", kind: "Must-have", title: "5–8+ yrs motion design", proof: "Eight years animating product UI, brand assets, and campaigns across digital and web.", example: "Selected work + About" },
+        { no: "02", kind: "Must-have", title: "Animation principles & modern tools", proof: "After Effects, Illustrator, Photoshop and Figma, with timing and easing chosen on purpose.", example: "Motion reel + case study" },
+        { no: "03", kind: "Must-have", title: "Motion for mobile & web surfaces", proof: "Interface motion designed responsively, then specified for the runtime it ships on.", example: "Onboarding loader" },
+        { no: "04", kind: "Must-have", title: "Layout & visual hierarchy", proof: "Motion serves the composition; what moves is what the eye should reach first.", example: "Choreography rules" },
+        { no: "05", kind: "Must-have", title: "Design systems, UX & UI", proof: "Tokenized libraries with variables, component APIs, and 1:1 code parity.", example: "\"Voltage\" system" },
+        { no: "06", kind: "Must-have", title: "Documenting motion language at scale", proof: "A duration scale, four named easing tokens, and choreography rules teams actually adopt.", example: "Motion system" },
+        { no: "07", kind: "Must-have", title: "Organization & asset management", proof: "Consistent naming, versioned sources, and specs stored alongside every export.", example: "Named, versioned, findable" },
+        { no: "08", kind: "Preferred", title: "Establishing motion practice", proof: "Running critique on the timeline and arguing motion in outcomes, not taste.", example: "How I work" },
+        { no: "09", kind: "Preferred", title: "Adapting to AI innovation", proof: "AI-in-the-loop from brief to production, to move faster without losing craft.", example: "AI content design" },
       ],
       emails: [
         {
           real: true, demo: false, variant: "ethos",
-          title: "BigBattery — ETHOS promo", kpi: "Promo", desc: "Promotional email for ETHOS home energy kits — 10% off plus free shipping over $5,000.",
+          title: "BigBattery - ETHOS promo", kpi: "Promo", desc: "Promotional email for ETHOS home energy kits - 10% off plus free shipping over $5,000.",
           subject: "Save 10% on ETHOS Kits + Free Shipping Over $5,000 🔋", sender: "The BigBattery Team", preheader: "Dependable energy storage, now on sale.",
         },
         {
           real: true, demo: false, variant: "evo",
-          title: "DeepCells — store launch", kpi: "Launch", desc: "Ecommerce launch announcement for DeepCells.com 2.0 with a full BatteryEVO product grid.",
+          title: "DeepCells - store launch", kpi: "Launch", desc: "Ecommerce launch announcement for DeepCells.com 2.0 with a full BatteryEVO product grid.",
           subject: "BatteryEVO Products Are Now Available To Order ⚡", sender: "DeepCells", preheader: "DeepCells.com 2.0 is live.",
         },
         {
           real: false, demo: true,
           brand: "Northwind", brandTag: "SaaS Platform", bg: "linear-gradient(135deg,#155EA0,#0E2A40)", cta: "#3BB54A", accentText: "#155EA0", accentBg: "#EAF3FB",
           title: "Welcome series", kpi: "68% open", desc: "3-part onboarding flow that drives first activation.",
-          subject: "Welcome to Northwind — let's get you set up 👋", sender: "Northwind Team", preheader: "Your 3-step quick start is inside.",
+          subject: "Welcome to Northwind - let's get you set up 👋", sender: "Northwind Team", preheader: "Your 3-step quick start is inside.",
           eyebrow: "Welcome aboard", headline: "You're in. Let's get to value fast.",
-          sub: "Thanks for joining Northwind. Here's the shortest path from signup to your first win — three quick steps and you're live.",
+          sub: "Thanks for joining Northwind. Here's the shortest path from signup to your first win - three quick steps and you're live.",
           imgLabel: "Quick Start",
-          bodyLines: ["We built onboarding to respect your time. Most teams are up and running in under ten minutes — no setup calls required."],
+          bodyLines: ["We built onboarding to respect your time. Most teams are up and running in under ten minutes - no setup calls required."],
           bullets: ["Connect your first data source in two clicks", "Invite a teammate so you're not building alone", "Publish your first dashboard from a template"],
           ctaLabel: "Finish setup →", finePrint: "Takes about 8 minutes · Need help? Just reply to this email.",
         },
@@ -1044,9 +1462,9 @@ class Component extends DCLogic {
           title: "Promo blast", kpi: "+52% rev", desc: "Urgency-led promo, bulletproof buttons, dark-mode tested.",
           subject: "⚡ 48 hours only: 30% off every plan", sender: "Voltly Deals", preheader: "Your upgrade just got a lot cheaper.",
           eyebrow: "Flash sale · ends soon", headline: "30% off. 48 hours. Go.",
-          sub: "Our biggest discount of the season is live. Upgrade now and lock in 30% off for a full year — this window closes Friday at midnight.",
+          sub: "Our biggest discount of the season is live. Upgrade now and lock in 30% off for a full year - this window closes Friday at midnight.",
           imgLabel: "30% Off",
-          bodyLines: ["No code needed — the discount is already applied at checkout. Existing plans upgrade instantly with prorated pricing."],
+          bodyLines: ["No code needed - the discount is already applied at checkout. Existing plans upgrade instantly with prorated pricing."],
           bullets: ["30% off all annual plans", "Applies to upgrades and new subscriptions", "Locked in for 12 full months"],
           ctaLabel: "Claim 30% off →", finePrint: "Offer ends Friday 11:59pm PT · Terms apply.",
         },
@@ -1058,7 +1476,7 @@ class Component extends DCLogic {
           eyebrow: "We saved your spot", headline: "It's been a minute. Let's pick back up.",
           sub: "Your workspace, dashboards, and data are exactly where you left them. Jump back in and we'll add a month on us.",
           imgLabel: "Welcome Back",
-          bodyLines: ["A lot has shipped since you've been gone — faster dashboards, AI summaries, and a cleaner mobile app. We'd love to show you."],
+          bodyLines: ["A lot has shipped since you've been gone - faster dashboards, AI summaries, and a cleaner mobile app. We'd love to show you."],
           bullets: ["Everything you built is still here", "One free month when you return this week", "New: AI insights on every dashboard"],
           ctaLabel: "Reopen my workspace →", finePrint: "Free month applied automatically · No strings attached.",
         },
@@ -1091,7 +1509,7 @@ class Component extends DCLogic {
     /* ---------- motion layer ---------- */
     const reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion:reduce)").matches;
 
-    // intro curtain — once per session, skippable
+    // intro curtain - once per session, skippable
     const intro = root.querySelector("[data-intro]");
     if (intro) {
       let seen = false;
@@ -1101,7 +1519,9 @@ class Component extends DCLogic {
       } else {
         intro.style.display = "flex";
         const nm = intro.querySelector("[data-introname]");
-        if (nm) { nm.style.animation = "pf-word-up 1s cubic-bezier(.19,1,.22,1) both"; nm.style.animationDelay = "120ms"; }
+        if (nm) { nm.style.animation = "pf-jump-in .92s cubic-bezier(.2,.9,.3,1) both"; nm.style.animationDelay = "80ms"; }
+        const ttl = intro.querySelector("[data-introtitle]");
+        if (ttl) { ttl.style.animation = "pf-jump-soft .8s cubic-bezier(.2,.9,.3,1) both"; ttl.style.animationDelay = "260ms"; }
         const lift = () => {
           if (intro.classList.contains("pf-lift")) return;
           intro.classList.add("pf-lift");
@@ -1109,7 +1529,33 @@ class Component extends DCLogic {
           setTimeout(() => intro.remove(), 800);
         };
         intro.addEventListener("click", lift);
-        this.introTimer = setTimeout(lift, 1900);
+
+        const load = intro.querySelector("[data-introload]");
+        if (load) {
+          const token = load.querySelector("[data-loadtoken]");
+          const fill = load.querySelector("[data-loadfill]");
+          const pct = load.querySelector("[data-loadpct]");
+          const DUR = 1800;
+          const t0 = performance.now();
+          let raf = null;
+          const step = () => {
+            const t = Math.min(1, (performance.now() - t0) / DUR);
+            const v = 1 - Math.pow(1 - t, 2.2);
+            if (token) token.style.left = (v * 100) + "%";
+            if (fill) fill.style.transform = "scaleX(" + v + ")";
+            if (pct) pct.textContent = Math.round(v * 100) + "%";
+            if (t >= 1) {
+              if (token) token.style.animation = "pf-load-settle .42s cubic-bezier(.34,1.56,.64,1) both";
+              setTimeout(lift, 320);
+              return;
+            }
+            raf = requestAnimationFrame(step);
+          };
+          raf = requestAnimationFrame(step);
+          this.loadRaf = () => cancelAnimationFrame(raf);
+        } else {
+          this.introTimer = setTimeout(lift, 1900);
+        }
       }
     }
 
@@ -1220,7 +1666,7 @@ class Component extends DCLogic {
     const navBar = root.querySelector("[data-navcondense]");
     const navLogo = navBar && navBar.querySelector('a[href="#top"]');
 
-    // gallery images wipe in rather than fade (default state is visible — the class only adds motion)
+    // gallery images wipe in rather than fade (default state is visible - the class only adds motion)
     if (!reduce) {
       this.wipeIo = new IntersectionObserver((es) => {
         es.forEach((en) => { if (en.isIntersecting) { en.target.classList.add("pf-wiped"); this.wipeIo.unobserve(en.target); } });
@@ -1272,6 +1718,121 @@ class Component extends DCLogic {
         ho.observe(h);
       });
     }
+
+    // click-to-load YouTube (no third-party script until asked)
+    const ytSlots = Array.prototype.slice.call(root.querySelectorAll("[data-yt]"));
+    // track each player's real reported position, so any fallback resume is accurate
+    this.ytTime = {};
+    this.onYtMsg = (ev) => {
+      if (!/youtube\.com$/.test((ev.origin || "").replace(/^https?:\/\/(www\.)?/, "https://").replace("https://", ""))) {
+        if ((ev.origin || "").indexOf("youtube.com") === -1) return;
+      }
+      let d = ev.data;
+      if (typeof d !== "string") return;
+      try { d = JSON.parse(d); } catch (err) { return; }
+      const info = d && d.info;
+      if (!info) return;
+      ytSlots.forEach((s) => {
+        const fr = s.querySelector("iframe");
+        if (fr && fr.contentWindow === ev.source) {
+          s.setAttribute("data-api", "1");
+          if (typeof info.currentTime === "number") this.ytTime[s.getAttribute("data-yt")] = info.currentTime;
+        }
+      });
+    };
+    window.addEventListener("message", this.onYtMsg);
+    const mountYT = (slot, muted) => {
+      if (slot.getAttribute("data-loaded")) return;
+      slot.setAttribute("data-loaded", "1");
+      const id = slot.getAttribute("data-yt");
+      const fr = document.createElement("iframe");
+      fr.src = "https://www.youtube.com/embed/" + id + "?autoplay=1&rel=0&playsinline=1&enablejsapi=1&origin=" + encodeURIComponent(location.origin) + "&loop=1&playlist=" + id + (muted ? "&mute=1&controls=0" : "&controls=1");
+      fr.referrerPolicy = "strict-origin-when-cross-origin";
+      fr.title = "Motion work";
+      fr.allow = "accelerometer; autoplay; clipboard-write; encrypted-media; picture-in-picture";
+      fr.allowFullscreen = true;
+      fr.style.cssText = "position:absolute;inset:0;width:100%;height:100%;border:0";
+      slot.appendChild(fr);
+      if (muted) {
+        const un = document.createElement("button");
+        un.textContent = "\u25B6 Play with sound";
+        un.style.cssText = "position:absolute;bottom:10px;right:12px;z-index:4;font-family:inherit;font-size:10.5px;font-weight:700;letter-spacing:.05em;color:#16302B;background:rgba(199,154,94,.95);padding:7px 12px;border:0;border-radius:4px;cursor:pointer";
+        un.addEventListener("click", (ev) => {
+          ev.stopPropagation();
+          // unmute the running player: position and looping are preserved, nothing reloads
+          const cmd = (func) => { try { fr.contentWindow.postMessage(JSON.stringify({ event: "command", func: func, args: [] }), "*"); } catch (err) {} };
+          cmd("unMute");
+          cmd("setVolume");
+          cmd("playVideo");
+          un.remove();
+          // if the API channel never answered, fall back to a reload at the real reported time
+          setTimeout(() => {
+            if (slot.getAttribute("data-api")) return;
+            const at = Math.max(0, Math.floor(this.ytTime[id] || 0));
+            fr.src = "https://www.youtube.com/embed/" + id + "?autoplay=1&rel=0&playsinline=1&controls=1&loop=1&playlist=" + id + (at ? "&start=" + at : "");
+          }, 700);
+        });
+        slot.appendChild(un);
+      }
+      const esc = document.createElement("a");
+      esc.href = "https://www.youtube.com/watch?v=" + id;
+      esc.target = "_blank";
+      esc.rel = "noopener noreferrer";
+      esc.textContent = "Open on YouTube \u2197";
+      esc.style.cssText = "position:absolute;bottom:10px;left:12px;z-index:3;font-size:10.5px;font-weight:700;letter-spacing:.06em;color:#F3F0E9;background:rgba(11,26,24,.8);padding:6px 11px;border-radius:4px;text-decoration:none";
+      slot.appendChild(esc);
+    };
+    if (ytSlots.length && !reduce && typeof IntersectionObserver !== "undefined") {
+      // play muted as each piece scrolls into view; sound stays user-initiated
+      this.ytIo = new IntersectionObserver((entries) => {
+        entries.forEach((en) => { if (en.isIntersecting) { mountYT(en.target, true); this.ytIo.unobserve(en.target); } });
+      }, { threshold: 0.45 });
+      ytSlots.forEach((s) => this.ytIo.observe(s));
+    }
+    ytSlots.forEach((slot) => {
+      const btn = slot.querySelector("[data-playbtn]");
+      const im = slot.querySelector("img");
+      slot.addEventListener("mouseenter", () => { if (btn) btn.style.transform = "translate(-50%,-50%) scale(1.12)"; if (im) { im.style.transform = "scale(1.04)"; im.style.opacity = ".85"; } });
+      slot.addEventListener("mouseleave", () => { if (btn) btn.style.transform = "translate(-50%,-50%)"; if (im) { im.style.transform = "none"; im.style.opacity = ".72"; } });
+      // single mount path: a deliberate click plays with sound
+      slot.addEventListener("click", () => mountYT(slot, false));
+    });
+    // Facebook: mount the real post player on click, with a link out if it is blocked
+    const fbSlots = Array.prototype.slice.call(root.querySelectorAll("[data-fb]"));
+    const mountFB = (slot) => {
+      if (slot.getAttribute("data-loaded")) return;
+      slot.setAttribute("data-loaded", "1");
+      const id = slot.getAttribute("data-fb");
+      const fr = document.createElement("iframe");
+      // /watch/?v= is the form the video plugin resolves reliably for reels
+      fr.src = "https://www.facebook.com/plugins/video.php?href=" + encodeURIComponent("https://www.facebook.com/watch/?v=" + id) + "&show_text=false&autoplay=true&mute=1&width=400";
+      fr.title = "Facebook reel";
+      fr.allow = "autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share";
+      fr.allowFullscreen = true;
+      fr.setAttribute("scrolling", "no");
+      fr.setAttribute("frameborder", "0");
+      fr.style.cssText = "position:absolute;inset:0;width:100%;height:100%;border:0;background:#000;z-index:2";
+      slot.insertBefore(fr, slot.firstChild);
+    };
+    fbSlots.forEach((slot) => {
+      const btn = slot.querySelector("[data-playbtn]");
+      slot.addEventListener("mouseenter", () => { if (btn) btn.style.transform = "translate(-50%,-50%) scale(1.12)"; });
+      slot.addEventListener("mouseleave", () => { if (btn) btn.style.transform = "translate(-50%,-50%)"; });
+      slot.addEventListener("click", () => mountFB(slot));
+    });
+    if (fbSlots.length && !reduce && typeof IntersectionObserver !== "undefined") {
+      this.fbIo = new IntersectionObserver((entries) => {
+        entries.forEach((en) => { if (en.isIntersecting) { mountFB(en.target); this.fbIo.unobserve(en.target); } });
+      }, { threshold: 0.45 });
+      fbSlots.forEach((s) => this.fbIo.observe(s));
+    }
+
+    root.querySelectorAll("[data-reelgrid] a[data-playbtn], [data-reelgrid] a").forEach((a) => {
+      const btn = a.querySelector("[data-playbtn]");
+      if (!btn) return;
+      a.addEventListener("mouseenter", () => { btn.style.transform = "translate(-50%,-50%) scale(1.12)"; btn.style.background = "rgba(199,154,94,.94)"; btn.style.color = "#16302B"; });
+      a.addEventListener("mouseleave", () => { btn.style.transform = "translate(-50%,-50%)"; btn.style.background = "transparent"; btn.style.color = "#C79A5E"; });
+    });
 
     // scroll progress + parallax on the hero artwork
     const bar = root.querySelector("[data-progress]");
@@ -1378,6 +1939,10 @@ class Component extends DCLogic {
   componentWillUnmount() {    if (this.io) this.io.disconnect();
     if (this.wipeIo) this.wipeIo.disconnect();
     if (this.introTimer) clearTimeout(this.introTimer);
+    if (this.loadRaf) this.loadRaf();
+    if (this.ytIo) this.ytIo.disconnect();
+    if (this.fbIo) this.fbIo.disconnect();
+    if (this.onYtMsg) window.removeEventListener("message", this.onYtMsg);
     if (this.closeFallback) clearTimeout(this.closeFallback);
     if (this.scrubRafs) this.scrubRafs.forEach((f) => f());
     document.body.removeAttribute("data-cursor-ready");

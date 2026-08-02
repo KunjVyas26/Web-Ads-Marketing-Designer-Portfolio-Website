@@ -18,7 +18,7 @@
 </style>
 </helmet>
 <div style="font-family:'Roboto','Helvetica Neue',Arial,sans-serif;background:#fff;height:100%;display:flex;flex-direction:column;min-height:0">
-  <div style="height:30px;flex:none;background:#0e2536;display:flex;align-items:center;gap:6px;padding:0 13px"><span style="width:8px;height:8px;border-radius:50%;background:#ff5f56"></span><span style="width:8px;height:8px;border-radius:50%;background:#ffbd2e"></span><span style="width:8px;height:8px;border-radius:50%;background:#27c93f"></span><span style="margin-left:11px;font-size:10px;color:#7f95a8;font-weight:600">{{ url }}</span></div>
+  <div style="height:30px;flex:none;background:#0e2536;display:flex;align-items:center;gap:6px;padding:0 13px"><span style="width:8px;height:8px;border-radius:50%;background:#ff5f56"></span><span style="width:8px;height:8px;border-radius:50%;background:#ffbd2e"></span><span style="width:8px;height:8px;border-radius:50%;background:#27c93f"></span></div>
   <div style="flex:1;min-height:0;overflow:hidden">
 
     <!-- ONBOARDING -->
@@ -72,7 +72,7 @@
             <div style="height:30px;background:linear-gradient(90deg,#0E2A40,#163C5A);display:flex;align-items:center;justify-content:center;color:#fff;font-family:'Roboto Condensed';font-weight:900;font-size:11px;letter-spacing:.04em;text-transform:uppercase">Northwind</div>
             <div style="padding:12px">
               <div style="font-size:11px;font-weight:900;color:#0E2A40;line-height:1.25;margin-bottom:6px">Welcome to Northwind 👋</div>
-              <div style="font-size:9px;color:#4A5560;line-height:1.5;margin-bottom:10px">You're in. Let's get your first dashboard live in under 10 minutes — no setup calls.</div>
+              <div style="font-size:9px;color:#4A5560;line-height:1.5;margin-bottom:10px">You're in. Let's get your first dashboard live in under 10 minutes - no setup calls.</div>
               <div style="background:linear-gradient(135deg,#EAF3FB,#E7F6ED);border-radius:6px;padding:9px;margin-bottom:10px"><div style="font-size:8px;font-weight:800;color:#155EA0;text-transform:uppercase;letter-spacing:.04em;margin-bottom:3px">3-step quick start</div><div style="font-size:8.5px;color:#4A5560;line-height:1.4">Connect a source · invite a teammate · publish a template</div></div>
               <div style="background:#3BB54A;color:#06331a;font-size:9px;font-weight:900;text-align:center;padding:8px;border-radius:6px">Finish setup →</div>
             </div>
@@ -150,7 +150,7 @@
         <div style="background:#fff;padding:16px;overflow:hidden">
           <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px"><div style="font-size:12px;font-weight:900;color:#0E2A40">Landing page · Draft</div><span style="font-size:9.5px;font-weight:800;color:#E07A1F;background:#FFF1E0;padding:4px 9px;border-radius:6px">Unpublished</span></div>
           <div style="margin-bottom:10px"><div style="font-size:9.5px;font-weight:700;color:#8A8A8A;margin-bottom:4px">Headline</div><div style="border:1px solid #E6E8EB;border-radius:7px;padding:9px 11px;font-size:12px;font-weight:800;color:#0E2A40">Ship reports in minutes, not meetings</div></div>
-          <div style="margin-bottom:10px"><div style="font-size:9.5px;font-weight:700;color:#8A8A8A;margin-bottom:4px">Body</div><div style="border:1px solid #E6E8EB;border-radius:7px;padding:9px 11px;font-size:10px;color:#4A5560;line-height:1.55">Northwind turns your scattered data into live dashboards your whole team actually reads — no SQL, no waiting on analytics. Connect a source and publish your first report in minutes.</div></div>
+          <div style="margin-bottom:10px"><div style="font-size:9.5px;font-weight:700;color:#8A8A8A;margin-bottom:4px">Body</div><div style="border:1px solid #E6E8EB;border-radius:7px;padding:9px 11px;font-size:10px;color:#4A5560;line-height:1.55">Northwind turns your scattered data into live dashboards your whole team actually reads - no SQL, no waiting on analytics. Connect a source and publish your first report in minutes.</div></div>
           <div><div style="font-size:9.5px;font-weight:700;color:#8A8A8A;margin-bottom:4px">CTA label</div><div style="border:1px solid #E6E8EB;border-radius:7px;padding:9px 11px;font-size:12px;font-weight:800;color:#0E2A40">Start free - no card</div></div>
         </div>
         <div style="background:linear-gradient(160deg,#0E2A40,#155EA0);padding:14px 12px;color:#fff" data-ps-hide>
@@ -163,10 +163,57 @@
       </div>
     </sc-if>
 
+    <sc-if value="{{ isMotion }}" hint-placeholder-val="{{ false }}">
+      <div style="display:grid;grid-template-columns:1fr 168px;height:100%;background:#1B1D21" data-ps-grid>
+        <div style="display:flex;flex-direction:column;min-width:0">
+          <div style="flex:1;background:#0F1113;display:flex;align-items:center;justify-content:center;padding:16px;min-height:0">
+            <div style="width:200px;background:#fff;border-radius:9px;overflow:hidden;box-shadow:0 10px 26px rgba(0,0,0,.5)">
+              <div style="height:30px;background:#0E2A40;display:flex;align-items:center;padding:0 11px;color:#fff;font-size:9.5px;font-weight:800;letter-spacing:.05em">NORTHWIND</div>
+              <div style="padding:12px">
+                <div style="display:flex;align-items:center;gap:8px;margin-bottom:9px">
+                  <span style="width:22px;height:22px;border-radius:50%;border:2px solid #E6E8EB;border-top-color:#3BB54A;display:block"></span>
+                  <div><div style="font-size:9.5px;font-weight:800;color:#0E2A40">Syncing your data</div><div style="font-size:8px;color:#8A8A8A">Step 2 of 3 · about 5s</div></div>
+                </div>
+                <div style="height:6px;border-radius:4px;background:#EEF1F4;overflow:hidden;margin-bottom:10px"><span style="display:block;height:100%;width:62%;background:linear-gradient(90deg,#155EA0,#3BB54A);border-radius:4px"></span></div>
+                <div style="display:flex;gap:5px"><span style="flex:1;height:26px;border-radius:5px;background:#F1F3F6"></span><span style="flex:1;height:26px;border-radius:5px;background:#F1F3F6"></span><span style="flex:1;height:26px;border-radius:5px;background:#EAF3FB"></span></div>
+              </div>
+            </div>
+          </div>
+          <div style="flex:none;background:#16181B;border-top:1px solid #2A2E34;padding:9px 12px 12px">
+            <div style="display:flex;align-items:center;gap:9px;margin-bottom:8px">
+              <span style="color:#C79A5E;font-size:10px">▶</span>
+              <span style="font-size:9px;color:#7D848E;font-family:ui-monospace,Menlo,monospace">00:00:14</span>
+              <span style="flex:1;height:1px;background:#2A2E34"></span>
+              <span style="font-size:8.5px;color:#7D848E;letter-spacing:.06em">30 FPS</span>
+            </div>
+            <div style="display:flex;flex-direction:column;gap:4px">
+              <div style="display:flex;align-items:center;gap:8px"><span style="width:52px;flex:none;font-size:8.5px;color:#9AA1AB">Spinner</span><span style="flex:1;height:9px;border-radius:2px;background:linear-gradient(90deg,#C79A5E 0 78%,#2A2E34 78%)"></span></div>
+              <div style="display:flex;align-items:center;gap:8px"><span style="width:52px;flex:none;font-size:8.5px;color:#9AA1AB">Bar fill</span><span style="flex:1;height:9px;border-radius:2px;background:linear-gradient(90deg,#2A2E34 0 12%,#3BB54A 12% 88%,#2A2E34 88%)"></span></div>
+              <div style="display:flex;align-items:center;gap:8px"><span style="width:52px;flex:none;font-size:8.5px;color:#9AA1AB">Label</span><span style="flex:1;height:9px;border-radius:2px;background:linear-gradient(90deg,#2A2E34 0 34%,#155EA0 34% 70%,#2A2E34 70%)"></span></div>
+              <div style="display:flex;align-items:center;gap:8px"><span style="width:52px;flex:none;font-size:8.5px;color:#9AA1AB">Success</span><span style="flex:1;height:9px;border-radius:2px;background:linear-gradient(90deg,#2A2E34 0 74%,#C79A5E 74% 96%,#2A2E34 96%)"></span></div>
+            </div>
+          </div>
+        </div>
+        <div style="background:#16181B;border-left:1px solid #2A2E34;padding:14px 12px;color:#E6E8EB" data-ps-hide>
+          <div style="font-size:9px;font-weight:800;color:#7D848E;text-transform:uppercase;letter-spacing:.1em;margin-bottom:11px">Spec</div>
+          <div style="font-size:9px;color:#7D848E;margin-bottom:3px">Duration</div>
+          <div style="font-size:11px;font-weight:700;margin-bottom:10px">240ms</div>
+          <div style="font-size:9px;color:#7D848E;margin-bottom:3px">Easing</div>
+          <div style="font-size:9.5px;font-weight:700;font-family:ui-monospace,Menlo,monospace;color:#C79A5E;margin-bottom:10px;word-break:break-all">ease-standard</div>
+          <div style="font-size:9px;color:#7D848E;margin-bottom:3px">Trigger</div>
+          <div style="font-size:10.5px;font-weight:700;margin-bottom:10px">On data fetch</div>
+          <div style="font-size:9px;color:#7D848E;margin-bottom:5px">Reduced motion</div>
+          <div style="font-size:9.5px;line-height:1.4;color:#B9C0C9">Static label swap, no spin</div>
+          <div style="margin-top:12px;padding-top:11px;border-top:1px solid #2A2E34;font-size:9px;color:#7D848E">Handoff</div>
+          <div style="font-size:10px;font-weight:700;color:#3BB54A">Render + spec sheet</div>
+        </div>
+      </div>
+    </sc-if>
+
   </div>
 </div>
 </x-dc>
-<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:560,&quot;height&quot;:320},&quot;variant&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;onboarding&quot;,&quot;email&quot;,&quot;system&quot;,&quot;landing&quot;,&quot;content&quot;],&quot;default&quot;:&quot;onboarding&quot;,&quot;tsType&quot;:&quot;string&quot;}}">
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:560,&quot;height&quot;:320},&quot;variant&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;onboarding&quot;,&quot;email&quot;,&quot;system&quot;,&quot;landing&quot;,&quot;content&quot;,&quot;motion&quot;],&quot;default&quot;:&quot;onboarding&quot;,&quot;tsType&quot;:&quot;string&quot;}}">
 class Component extends DCLogic {
   renderVals() {
     const v = this.props.variant || "onboarding";
@@ -176,6 +223,7 @@ class Component extends DCLogic {
       system: "figma.com/file/voltage-ds",
       landing: "go.northwind.io/campaign",
       content: "app.contentful.com/spaces/northwind",
+      motion: "onboarding-loader.aep",
     };
     return {
       isOnboarding: v === "onboarding",
@@ -183,6 +231,7 @@ class Component extends DCLogic {
       isSystem: v === "system",
       isLanding: v === "landing",
       isContent: v === "content",
+      isMotion: v === "motion",
       url: urls[v] || urls.onboarding,
     };
   }
